@@ -1,1 +1,15 @@
+<div class="container-carousel xs:px-2 sm:px-4">
+  <nz-carousel [nzEffect]="effect" nzAutoPlay class="h-[300px]">
+    @for (index of array; track index) {
+    <div nz-carousel-content class="!block">
+      <h3>{{ index }}</h3>
+    </div>
+    }
+  </nz-carousel>
+</div>
 
+<div class="container-all-list">
+  <nat-list-card [categoryName]="'Các loại hải sản'"></nat-list-card>
+  <nat-list-card [categoryName]="'Trái cây - Hạt - Củ'"></nat-list-card>
+  <nat-list-card [categoryName]="'Các loại thịt khô'"></nat-list-card>
+</div>

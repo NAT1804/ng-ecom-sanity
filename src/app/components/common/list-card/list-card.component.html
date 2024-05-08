@@ -1,0 +1,48 @@
+<div class="container-list-card xs:px-2 sm:px-4">
+  <nz-divider [nzText]="categoryName()"></nz-divider>
+  <nz-list
+    [nzGrid]="{ gutter: 8, xs: 12,
+    sm: 12,
+    md: 6,
+    lg: 6,
+    xl: 6,
+    xxl: 4, }"
+    [nzPagination]="paginationTpl"
+    [nzDataSource]="
+      data | slice : (pageIndex - 1) * pageSize : pageIndex * pageSize
+    "
+    [nzRenderItem]="item"
+  >
+    <ng-template #item let-item>
+      <nz-list-item [nzContent]="content">
+        <ng-template #content>
+          <nz-card nzHoverable class="w-full" [nzCover]="coverTemplate">
+            <nz-card-meta
+              [nzTitle]="item.title"
+              nzDescription="www.instagram.com"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img
+              nz-image
+              nzSrc="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              alt="A girl"
+              [nzFallback]="fallback"
+            />
+          </ng-template>
+        </ng-template>
+      </nz-list-item>
+    </ng-template>
+    <ng-template #paginationTpl>
+      <nz-list-pagination>
+        <nz-pagination
+          [nzPageIndex]="pageIndex"
+          [nzPageSize]="pageSize"
+          [nzTotal]="data.length"
+          (nzPageIndexChange)="pageIndex = $event"
+          (nzPageSizeChange)="pageSize = $event"
+        ></nz-pagination>
+      </nz-list-pagination>
+    </ng-template>
+  </nz-list>
+</div>
