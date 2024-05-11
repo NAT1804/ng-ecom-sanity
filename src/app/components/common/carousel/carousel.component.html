@@ -1,0 +1,68 @@
+<swiper-container
+  #carousel
+  natSwiper
+  [config]="carouselConfig"
+  init="false"
+  class="swiper-container w-full h-[300px]"
+>
+  @for (slide of slides; let i = $index; track i) {
+  <swiper-slide>
+    <div
+      class="relative w-full h-full bg-center bg-no-repeat bg-cover"
+      [style.backgroundImage]="'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url(' + slide.url + ')'"
+    >
+      <div
+        class="hidden sm:block absolute top-[50%] translate-y-[-50%] left-[50px] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-[#fff] font-bold uppercase info_banner"
+        nz-row
+      >
+        <div nz-col nzSpan="24">
+          {{ slide.title }}
+        </div>
+        <div nz-col class="flex items-center mt-1">
+          <button nz-button nzType="primary" [nzSize]="'large'">
+            <span nz-icon nzType="play-circle"></span>
+          </button>
+          <button
+            nz-button
+            nzType="default"
+            [nzSize]="'large'"
+            class="flex items-center"
+          >
+            <div class="flex items-center">
+              <span nz-icon nzType="info-circle" class="mr-1"></span>
+              <span> Liên hệ </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </swiper-slide>
+  }
+</swiper-container>
+<button
+  id="carousel-prev-btn"
+  #prevBtn
+  nz-button
+  nzType="default"
+  [nzSize]="'large'"
+  class="flex items-center"
+>
+  <div class="flex items-center">
+    <span nz-icon nzType="info-circle" class="mr-1"></span>
+    <span>Prev</span>
+  </div>
+</button>
+<button
+  id="carousel-next-btn"
+  #nextBtn
+  nz-button
+  nzType="default"
+  [nzSize]="'large'"
+  class="flex items-center"
+>
+  <div class="flex items-center">
+    <span nz-icon nzType="info-circle" class="mr-1"></span>
+    <span>Next</span>
+  </div>
+</button>
+<div id="carousel-pagination"></div>

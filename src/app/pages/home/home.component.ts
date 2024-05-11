@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CarouselComponent } from '@components/common/carousel/carousel.component';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
+import { PaginationComponent } from '@components/common/pagination/pagination.component';
 import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import {
-  NZ_CAROUSEL_CUSTOM_STRATEGIES,
-  NzCarouselFlipStrategy,
-  NzCarouselModule,
-  NzCarouselTransformNoLoopStrategy,
-} from 'ng-zorro-antd/carousel';
 
 @Component({
   selector: 'app-home',
@@ -16,27 +11,13 @@ import {
   imports: [
     CommonModule,
     ThemeSelectorComponent,
-    NzBreadCrumbModule,
-    NzCarouselModule,
-    ListCardComponent
+    CarouselComponent,
+    ListCardComponent,
+    PaginationComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.less',
-  providers: [
-    {
-      provide: NZ_CAROUSEL_CUSTOM_STRATEGIES,
-      useValue: [
-        {
-          name: 'transform-no-loop',
-          strategy: NzCarouselTransformNoLoopStrategy,
-        },
-        { name: 'flip', strategy: NzCarouselFlipStrategy },
-      ],
-    },
-  ],
 })
 export class HomeComponent {
-  array = [1, 2, 3, 4];
-
-  effect = 'flip';
+  
 }

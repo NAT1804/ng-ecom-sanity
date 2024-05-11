@@ -1,0 +1,20 @@
+#carousel-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  background: #000;
+}
+.swiper-pagination-bullet-active .path {
+  display: inline-block !important;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  animation: dash linear 120s;
+  animation-iteration-count: unset;
+}
+.path {
+  display: none;
+}

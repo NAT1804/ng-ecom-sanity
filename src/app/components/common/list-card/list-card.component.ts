@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { NzListModule, NzListPaginationComponent } from 'ng-zorro-antd/list';
+import { NzListModule } from 'ng-zorro-antd/list';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common';
     NzDividerModule,
     NzImageModule,
     NzPaginationModule,
-    NzListPaginationComponent
   ],
   templateUrl: './list-card.component.html',
   styleUrl: './list-card.component.less',
