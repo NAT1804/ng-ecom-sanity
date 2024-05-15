@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, ViewChild } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { SwiperDirective } from '@directives/swiper.directive';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -8,19 +8,20 @@ import {
   Autoplay,
   Mousewheel,
   Navigation,
-  Pagination,
 } from 'swiper/modules';
 import { SwiperOptions } from 'swiper/types';
+import { register } from 'swiper/element/bundle';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'nat-carousel',
   standalone: true,
-  imports: [CommonModule, NzButtonModule, SwiperDirective, NzGridModule],
+  imports: [SwiperDirective, NzButtonModule, NzGridModule, NzIconModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.less',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CarouselComponent {
+export class CarouselComponent implements OnInit {
   slides: any[] = [
     {
       title: 'Title 1',
@@ -41,8 +42,17 @@ export class CarouselComponent {
   ];
   @ViewChild('carousel', { static: false }) carousel!: ElementRef<HTMLElement>;
 
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    if(isPlatformBrowser(platformId)) {
+      // Register swiper element
+      // register()
+    }
+  }
+
+  ngOnInit(): void {}
+
   readonly carouselConfig: SwiperOptions = {
-    modules: [Navigation, Pagination, A11y, Mousewheel, Autoplay],
+    // modules: [A11y, Mousewheel, Autoplay],
     // autoHeight: true,
     spaceBetween: 20,
     navigation: {

@@ -1,29 +1,17 @@
 <nz-layout>
-  <nat-header></nat-header>
+  <nat-header class="sticky top-0 z-10"></nat-header>
   <nz-content class="outer-content">
     <nz-layout class="inner-layout">
       <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
         <div class="logo"></div>
         <ul nz-menu nzMode="inline">
-          <li nz-menu-item>
-            <span nz-icon nzType="user"></span>
-            <span>nav 1</span>
-          </li>
-          <li nz-menu-item>
-            <span nz-icon nzType="video-camera"></span>
-            <span>nav 2</span>
-          </li>
-          <li nz-menu-item>
-            <span nz-icon nzType="upload"></span>
-            <span>nav 3</span>
-          </li>
-          <li nz-menu-item>
-            <span nz-icon nzType="user"></span>
-            <span>nav 4</span>
+          <li nz-menu-item (click)="goHome()">
+            <!-- <span nz-icon nzType="user"></span> -->
+            <span>Trang chủ</span>
           </li>
         </ul>
       </nz-sider>
-      <nz-content class="xs:px-0 sm:px-4">
+      <nz-content class="pt-2 pb-[110px] xs:px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8">
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>

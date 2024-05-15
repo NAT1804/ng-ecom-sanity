@@ -16,6 +16,11 @@ export default defineType({
         type: "number",
       }),
       defineField({
+        name: "maxprice",
+        title: "Max Price",
+        type: "number",
+      }),
+      defineField({
         name: "sku",
         title: "SKU",
         type: "string",

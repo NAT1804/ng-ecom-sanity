@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -19,9 +19,18 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     FooterComponent,
     NzMenuModule,
     NzIconModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
+    RouterModule
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.less',
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+  private readonly router = inject(Router)
+
+  constructor() {}
+
+  public goHome(): void {
+    this.router.navigateByUrl('/home')
+  }
+}

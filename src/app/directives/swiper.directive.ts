@@ -1,40 +1,42 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   AfterViewInit,
   Directive,
   ElementRef,
+  INJECTOR,
   Inject,
   Input,
+  OnInit,
   PLATFORM_ID,
-  inject,
 } from '@angular/core';
+import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
-import { register } from 'swiper/element';
-import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
   selector: '[natSwiper]',
   standalone: true,
 })
-export class SwiperDirective implements AfterViewInit {
-  private swiperElement!: HTMLElement;
-
+export class SwiperDirective implements OnInit, AfterViewInit {
   @Input('config') config?: SwiperOptions;
 
-  private readonly el = inject(ElementRef<HTMLElement>);
+  private isBrowser: boolean = false;
 
-  private isBrowser: boolean;
-
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(
+    private el: ElementRef<SwiperContainer>,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
+  ngOnInit(): void {}
+
   ngAfterViewInit() {
-    this.swiperElement = this.el.nativeElement;
-    Object.assign(this.swiperElement, this.config);
     if (this.isBrowser) {
-      console.log(this.swiperElement);
-      // @ts-ignore
-      this.swiperElement?.initialize();
+      const nativeEl = this.el.nativeElement;
+      if (nativeEl) {
+        Object.assign(nativeEl, this.config);
+        nativeEl?.initialize();
+      }
     }
   }
 }

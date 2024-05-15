@@ -6,14 +6,10 @@ import { vi_VN, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { register } from 'swiper/element/bundle';
 
 registerLocaleData(vi);
-
-// Register swiper element
-register()
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +19,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FormsModule),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
+    provideHttpClient(withFetch())
   ],
 };

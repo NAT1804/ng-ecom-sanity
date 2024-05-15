@@ -1,7 +1,7 @@
 <nat-carousel></nat-carousel>
 
 <div class="container-all-list">
-  <nat-list-card [categoryName]="'Các loại hải sản'"></nat-list-card>
-  <nat-list-card [categoryName]="'Trái cây - Hạt - Củ'"></nat-list-card>
-  <nat-list-card [categoryName]="'Các loại thịt khô'"></nat-list-card>
+  @for (item of categories; track $index) {
+    <nat-list-card [categoryName]="item.title" [data]="item.products"></nat-list-card>
+  }
 </div>

@@ -21,28 +21,24 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'price',
-      title: 'Price',
-      type: 'number',
+      name: "defaultProductVariant",
+      title: "Default variant",
+      type: "productVariant",
     }),
     defineField({
-      name: 'details',
-      title: 'Details',
-      type: 'string',
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "string" }],
     }),
     defineField({
-      name: 'images',
-      title: 'Images',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-        },
-      ],
+      name: "blurb",
+      title: "Blurb",
+      type: "string",
     }),
     defineField({
-      name: 'deatil',
-      title: 'Details',
+      name: 'body',
+      title: 'Body',
       type: 'blockContent',
     }),
     defineField({

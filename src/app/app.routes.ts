@@ -16,6 +16,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@pages/home/home.component').then((m) => m.HomeComponent),
       },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('@pages/products/products.routes').then((m) => m.productRoutes),
+      },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('@pages/home/home.component').then((m) => m.HomeComponent),
+      },
     ],
   },
 ];
