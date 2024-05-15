@@ -8,7 +8,7 @@ if (!PROJECT_ID || !DATASET) {
 }
 
 export const environment = {
-  production: true,
+  production: false,
   sanity: {
     projectId: PROJECT_ID,
     dataset: DATASET,
