@@ -30,6 +30,7 @@
       "@environments/*": ["src/environments/*"],
       "@pipes/*": ["src/app/pipes/*"],
       "@resolve/*": ["src/app/resolve/*"],
+      "@constants": ["src/app/constants/index.ts"],
     }
   },
   "angularCompilerOptions": {

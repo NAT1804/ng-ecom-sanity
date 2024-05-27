@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, input } from '@angular/core';
 import { SwiperDirective } from '@directives/swiper.directive';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -12,41 +12,26 @@ import {
 import { SwiperOptions } from 'swiper/types';
 import { register } from 'swiper/element/bundle';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IBanner } from '@models/banner.model';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { SanityImagePipe } from '@pipes/sanity-image.pipe';
+import { fallbackImage } from '@constants';
 
 @Component({
   selector: 'nat-carousel',
   standalone: true,
-  imports: [SwiperDirective, NzButtonModule, NzGridModule, NzIconModule],
+  imports: [SwiperDirective, NzButtonModule, NzGridModule, NzIconModule, NzImageModule, SanityImagePipe],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.less',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CarouselComponent implements OnInit {
-  slides: any[] = [
-    {
-      title: 'Title 1',
-      url: 'https://plus.unsplash.com/premium_photo-1676009619407-18a5121f9687?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D'
-    },
-    {
-      title: 'Title 2',
-      url: 'https://images.unsplash.com/32/Mc8kW4x9Q3aRR3RkP5Im_IMG_4417.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D'
-    },
-    {
-      title: 'Title 3',
-      url: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D'
-    },
-    {
-      title: 'Title 4',
-      url: 'https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D'
-    },
-  ];
-  @ViewChild('carousel', { static: false }) carousel!: ElementRef<HTMLElement>;
+  slides = input<IBanner[]>([]);
+
+  fallback = fallbackImage
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    if(isPlatformBrowser(platformId)) {
-      // Register swiper element
-      // register()
-    }
+    if(isPlatformBrowser(platformId)) {}
   }
 
   ngOnInit(): void {}

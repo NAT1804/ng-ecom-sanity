@@ -11,6 +11,7 @@ import { IProduct } from '@models/product.model';
 import { Observable, from, tap } from 'rxjs';
 import { ICategory } from '@models/category.model';
 import { IBaseResponse, IResponseProductsByCategory } from '@models/base-response.model';
+import { IBanner } from '@models/banner.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +49,12 @@ export class SanityService {
     ));
   }
 
+  getAllBanners(): Observable<IBanner[]> {
+    return from(this.sanityClient().fetch(
+      '*[_type == "banner"]|order(_createdAt desc)'
+    ));
+  }
+
   getProductsByCategory(): Observable<IResponseProductsByCategory[]> {
     return from(this.sanityClient().fetch(
       `*[_type == "category"]{
@@ -61,6 +68,17 @@ export class SanityService {
   getDetailProduct(slug: string): Observable<any> {
     return from(this.sanityClient().fetch(
       '*[_type == "product" && slug.current == $slug][0]',
+      { slug }
+    ));
+  }
+
+  getProductsOfSpecificCategory(slug: string): Observable<any> {
+    return from(this.sanityClient().fetch(
+      `*[_type == "category" && slug.current == $slug][0]{
+        _id,
+        title,
+        "products": *[_type == "product" && references(^._id)]
+      }`,
       { slug }
     ));
   }

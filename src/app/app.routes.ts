@@ -23,8 +23,8 @@ export const routes: Routes = [
       },
       {
         path: 'categories',
-        loadComponent: () =>
-          import('@pages/home/home.component').then((m) => m.HomeComponent),
+        loadChildren: () =>
+          import('@pages/categories/categories.routes').then((m) => m.categoryRoutes),
       },
     ],
   },

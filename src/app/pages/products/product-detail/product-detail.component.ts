@@ -19,6 +19,7 @@ import { switchMap } from 'rxjs';
 import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'nat-product-detail',
@@ -29,7 +30,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     NzButtonModule,
     SanityImagePipe,
     PortableTextToHTML,
-    NzTabsModule
+    NzTabsModule,
+    CurrencyPipe
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.less',
@@ -102,7 +104,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.productData = this.activedRoute.snapshot.data['productDetail'];
-    console.log(this.productData);
   //   this.activedRoute.queryParams
   //     .pipe(
   //       switchMap((params: Params) => {

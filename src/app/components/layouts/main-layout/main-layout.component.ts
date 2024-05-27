@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { HeaderComponent } from '../header/header.component';
@@ -7,6 +7,8 @@ import { FooterComponent } from '../footer/footer.component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
+import { SanityService } from '@services/sanity/sanity.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -20,17 +22,30 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzMenuModule,
     NzIconModule,
     NzBreadCrumbModule,
-    RouterModule
+    RouterModule,
+    ThemeSelectorComponent,
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.less',
 })
-export class MainLayoutComponent {
-  private readonly router = inject(Router)
+export class MainLayoutComponent implements OnInit {
+  private readonly router = inject(Router);
+  categories: any[] = [];
+  private sanityService = inject(SanityService);
 
   constructor() {}
 
+  ngOnInit(): void {
+    this.sanityService.getAllCategories().subscribe((data) => {
+      this.categories = data;
+    });
+  }
+
   public goHome(): void {
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/home');
+  }
+
+  public goToPage(slug: any) {
+    this.router.navigateByUrl(`/categories?s=${slug.current}`);
   }
 }

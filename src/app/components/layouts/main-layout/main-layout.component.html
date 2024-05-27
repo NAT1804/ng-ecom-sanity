@@ -6,8 +6,15 @@
         <div class="logo"></div>
         <ul nz-menu nzMode="inline">
           <li nz-menu-item (click)="goHome()">
-            <!-- <span nz-icon nzType="user"></span> -->
             <span>Trang chủ</span>
+          </li>
+          @for (item of categories; track $index) {
+            <li nz-menu-item (click)="goToPage(item.slug)">
+              <span class="uppercase">{{ item.title }}</span>
+            </li>
+          }
+          <li nz-menu-item>
+            <nat-theme-selector></nat-theme-selector>
           </li>
         </ul>
       </nz-sider>

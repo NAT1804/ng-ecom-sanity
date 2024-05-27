@@ -47,8 +47,15 @@
         <ng-template nz-tab>
           <div
             class="product__content border border-primary p-2 rounded shadow-sm"
-            [innerHTML]="productData?.body | portableTextToHTML"
-          ></div>
+          >
+            <div class="price flex items-center gap-x-2">
+              <span>Giá: </span>
+              <h3 class="product__price mb-0">{{ productData?.defaultProductVariant?.price | currency: 'VND' }}</h3>
+              <span>-</span>
+              <h3 class="product__maxprice mb-0">{{ productData?.defaultProductVariant?.maxprice | currency: 'VND' }}</h3>
+            </div>
+            <div [innerHTML]="productData?.body | portableTextToHTML"></div>
+          </div>
         </ng-template>
       </nz-tab>
     </nz-tabset>

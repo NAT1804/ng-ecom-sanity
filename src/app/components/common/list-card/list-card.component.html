@@ -2,8 +2,8 @@
 <div class="container-list-card xs:px-2 sm:px-4">
   <nz-divider class="custom-divider" [nzText]="categoryName()"></nz-divider>
   <div nz-row [nzGutter]="[16, 16]">
-    @for (item of data() | slice : (pageIndex - 1) * pageSize : pageIndex *
-    pageSize; track $index) {
+    @for (item of data() | slice : (pageIndex() - 1) * pageSize() : pageIndex()
+    * pageSize(); track $index) {
     <div
       nz-col
       nzXs="12"
@@ -14,7 +14,12 @@
       nzXXl="4"
       class="gutter-row"
     >
-      <nz-card nzHoverable class="w-full" [nzCover]="coverTemplate" class="h-full">
+      <nz-card
+        nzHoverable
+        class="w-full"
+        [nzCover]="coverTemplate"
+        class="h-full"
+      >
         <nz-card-meta
           [nzTitle]="$any(item).title"
           [nzDescription]="description"
@@ -41,11 +46,11 @@
   </div>
   <nz-pagination
     class="custom-pagination"
-    [nzPageIndex]="pageIndex"
-    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex()"
+    [nzPageSize]="pageSize()"
     [nzTotal]="data().length"
-    (nzPageIndexChange)="pageIndex = $event"
-    (nzPageSizeChange)="pageSize = $event"
+    (nzPageIndexChange)="pageIndex.set($event)"
+    (nzPageSizeChange)="pageSize.set($event)"
   ></nz-pagination>
 </div>
 }
