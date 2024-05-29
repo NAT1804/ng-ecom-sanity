@@ -1,5 +1,78 @@
-<nz-header class="flex justify-between sticky top-0 border-b-2 border-primary">
-  <header class="my-auto text-xl font-bold sticky top-0">Hotline: {{ storeInfor?.hotline }}</header>
-  <header class="my-auto text-xl font-bold sticky top-0">Địa chỉ: {{ storeInfor?.address }}</header>
-  <header class="my-auto text-xl font-bold sticky top-0">Email: {{ storeInfor?.email }}</header>
+<nz-header class="border-b-2 border-primary">
+  <div nz-row class="py-2">
+    <div
+      nz-col
+      [nzXs]="24"
+      [nzSm]="24"
+      [nzLg]="5"
+      class="text-lg text-[#fff] xs:text-center sm:text-center"
+    >
+      Hotline: <span class="font-semibold">{{ storeInfor?.hotline }}</span>
+    </div>
+    <div nz-col [nzXs]="0" [nzSm]="0" [nzLg]="14" class="text-lg text-[#fff]">
+      <span class="font-semibold">Địa chỉ:</span> {{ storeInfor?.address }}
+    </div>
+    <div nz-col [nzXs]="0" [nzSm]="0" [nzLg]="5" class="text-lg text-[#fff]">
+      Email: <span class="font-semibold">{{ storeInfor?.email }}</span>
+    </div>
+  </div>
 </nz-header>
+<div nz-row class="logo-container pb-2">
+  <div
+    nz-col
+    [nzXs]="{
+      span: 24
+    }"
+    [nzSm]="24"
+    [nzLg]="{
+      span: 2,
+      offset: 2
+    }"
+  >
+    <img
+      src="assets/images/logo.jpg"
+      alt="Logo Ăn Vặt Cheri"
+      class="w-[100px] rounded-[50%] my-2 xs:mx-auto sm:mx-auto"
+    />
+  </div>
+  <div
+    nz-col
+    [nzXs]="24"
+    [nzSm]="24"
+    [nzLg]="16"
+    class="m-auto xs:px-4 sm:px-5 md:px-6 lg:px-0"
+  >
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input placeholder="Tìm kiếm sản phẩm" />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="primary" nzSize="large" nzSearch>
+        Tìm kiếm
+      </button>
+    </ng-template>
+  </div>
+</div>
+<!-- <nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  [nzPlacement]="'right'"
+  nzTitle="Drawer"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <div class="logo"></div>
+    <ul nz-menu nzMode="inline">
+      <li nz-menu-item (click)="goHome()">
+        <span>Trang chủ</span>
+      </li>
+      @for (item of categories; track $index) {
+      <li nz-menu-item (click)="goToPage(item.slug)">
+        <span class="uppercase">{{ item.title }}</span>
+      </li>
+      }
+      <li nz-menu-item>
+        <nat-theme-selector></nat-theme-selector>
+      </li>
+    </ul>
+  </ng-container>
+</nz-drawer> -->

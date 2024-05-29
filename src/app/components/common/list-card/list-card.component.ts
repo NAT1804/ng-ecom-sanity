@@ -5,7 +5,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { SlicePipe } from '@angular/common';
+import { CommonModule, SlicePipe } from '@angular/common';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { SanityImagePipe } from '@pipes/sanity-image.pipe';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -17,6 +17,7 @@ import { fallbackImage } from '@constants';
   selector: 'nat-list-card',
   standalone: true,
   imports: [
+    CommonModule,
     NzListModule,
     NzCardModule,
     NzGridModule,
@@ -45,10 +46,5 @@ export class ListCardComponent<T> implements OnInit {
 
   openProductDetail(slug: string) {
     this.router.navigateByUrl(`/products?s=${slug}`);
-  }
-
-  handleClickImage($event: MouseEvent) {
-    $event.preventDefault();
-    console.log('image');
   }
 }

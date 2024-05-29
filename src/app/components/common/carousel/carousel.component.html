@@ -6,31 +6,23 @@
   class="swiper-container w-full h-[300px]"
 >
   @for (slide of slides(); let i = $index; track i) {
-  <swiper-slide>
+  <swiper-slide class="w-[300px]">
+    <img
+      class="custom-image w-full object-cover"
+      nz-image
+      [nzSrc]="slide?.image ? (slide.image | sanityImage) : ''"
+      [alt]="slide.buttonText"
+      [nzFallback]="fallback"
+      [nzDisablePreview]="true"
+    />
     <div
-      class="relative w-full h-full bg-center bg-no-repeat bg-cover"
-      [style.backgroundImage]="
-        'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url(' +
-        slide.image +
-        ')'
-      "
+      class="hidden sm:block absolute top-[50%] translate-y-[-50%] left-[50px] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-[#fff] font-bold uppercase info_banner"
+      nz-row
     >
-      <img
-        class="custom-image"
-        nz-image
-        [nzSrc]="slide?.image ? (slide.image | sanityImage) : ''"
-        [alt]="slide.buttonText"
-        [nzFallback]="fallback"
-        [nzDisablePreview]="true"
-      />
-      <div
-        class="hidden sm:block absolute top-[50%] translate-y-[-50%] left-[50px] text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-[#fff] font-bold uppercase info_banner"
-        nz-row
-      >
-        <div nz-col nzSpan="24">
+      <!-- <div nz-col nzSpan="24">
           {{ slide.buttonText }}
-        </div>
-        <!-- <div nz-col class="flex items-center mt-1">
+        </div> -->
+      <!-- <div nz-col class="flex items-center mt-1">
           <button nz-button nzType="primary" [nzSize]="'large'">
             <span nz-icon nzType="play-circle"></span>
           </button>
@@ -46,7 +38,6 @@
             </div>
           </button>
         </div> -->
-      </div>
     </div>
   </swiper-slide>
   }

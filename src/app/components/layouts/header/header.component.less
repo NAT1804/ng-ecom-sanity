@@ -1,0 +1,13 @@
+@import "mixin";
+
+.themeMixin({
+  :host ::ng-deep {
+    .ant-layout-header {
+      height: auto;
+      background: @primary-color;
+    }
+    .logo-container {
+      background-color: @layout-header-background
+    }
+  }
+});

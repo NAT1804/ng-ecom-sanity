@@ -18,28 +18,40 @@
         nzHoverable
         class="w-full"
         [nzCover]="coverTemplate"
-        class="h-full"
+        class="h-full !rounded-lg flex flex-col"
       >
         <nz-card-meta
-          [nzTitle]="$any(item).title"
+          [nzTitle]="title"
           [nzDescription]="description"
           (click)="openProductDetail($any(item).slug.current)"
         ></nz-card-meta>
       </nz-card>
       <ng-template #coverTemplate>
         <img
-          class="custom-image"
+          class="custom-image !rounded-tl-lg !rounded-tr-lg object-cover h-full"
           nz-image
           [nzSrc]="$any(item)?.defaultProductVariant?.images?.[0] ? ($any(item).defaultProductVariant.images[0] | sanityImage) : ''"
           [alt]="$any(item).title"
           [nzFallback]="fallback"
-          (click)="handleClickImage($event)"
         />
       </ng-template>
-      <ng-template #description>
-        <p nz-typography nzEllipsis [nzEllipsisRows]="3">
-          {{ $any(item).blurb }}
+      <ng-template #title>
+        <p>
+          {{ $any(item).title }}
         </p>
+      </ng-template>
+      <ng-template #description>
+        <div class="price flex items-center justify-end gap-x-2">
+          <span class="xs:hidden sm:hidden md:inline-block">Giá: </span>
+          <h3 class="product__price mb-0 text-primary">{{ $any(item)?.defaultProductVariant?.price | currency: 'VND' }}</h3>
+          @if ($any(item)?.defaultProductVariant?.maxprice) {
+            <span>-</span>
+            <h3 class="product__maxprice mb-0 text-primary">{{ $any(item)?.defaultProductVariant?.maxprice | currency: 'VND' }}</h3>
+          }
+        </div>
+        <!-- <p nz-typography nzEllipsis [nzEllipsisRows]="3">
+          {{ $any(item).blurb }}
+        </p> -->
       </ng-template>
     </div>
     }

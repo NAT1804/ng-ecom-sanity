@@ -9,6 +9,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
 import { SanityService } from '@services/sanity/sanity.service';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,6 +27,9 @@ import { SanityService } from '@services/sanity/sanity.service';
     NzBreadCrumbModule,
     RouterModule,
     ThemeSelectorComponent,
+    NzBackTopModule,
+    NzDrawerModule,
+    NzButtonModule
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.less',
@@ -33,6 +39,7 @@ export class MainLayoutComponent implements OnInit {
   categories: any[] = [];
   storeInfor: any
   private sanityService = inject(SanityService);
+  visible = false;
 
   constructor() {}
 
@@ -43,7 +50,6 @@ export class MainLayoutComponent implements OnInit {
 
     this.sanityService.getStoreInformation().subscribe((data) => {
       this.storeInfor = data;
-      console.log(this.storeInfor)
     });
   }
 
@@ -53,5 +59,13 @@ export class MainLayoutComponent implements OnInit {
 
   public goToPage(slug: any) {
     this.router.navigateByUrl(`/categories?s=${slug.current}`);
+  }
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
   }
 }

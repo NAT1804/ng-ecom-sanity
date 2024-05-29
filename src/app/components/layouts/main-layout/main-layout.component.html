@@ -1,15 +1,15 @@
 <nz-layout>
-  <nat-header class="sticky top-0 z-10" [storeInfor]="storeInfor"></nat-header>
+  <nat-header [storeInfor]="storeInfor"></nat-header>
   <nz-content class="outer-content">
     <nz-layout class="inner-layout">
-      <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+      <nz-sider #sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
         <div class="logo"></div>
         <ul nz-menu nzMode="inline">
-          <li nz-menu-item (click)="goHome()">
+          <li nz-menu-item (click)="goHome(); sider.setCollapsed(true)">
             <span>Trang chủ</span>
           </li>
           @for (item of categories; track $index) {
-            <li nz-menu-item (click)="goToPage(item.slug)">
+            <li nz-menu-item (click)="goToPage(item.slug); sider.setCollapsed(true)">
               <span class="uppercase">{{ item.title }}</span>
             </li>
           }
@@ -18,10 +18,15 @@
           </li>
         </ul>
       </nz-sider>
-      <nz-content class="pt-2 pb-[110px] xs:px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8">
+      <!-- <button nz-button nzType="primary" (click)="open()">Open</button> -->
+      <nz-content
+        class="pt-2 pb-[110px] xs:px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8"
+      >
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
     <nat-footer [storeInfor]="storeInfor"></nat-footer>
   </nz-content>
+  
 </nz-layout>
+<nz-back-top></nz-back-top>

@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     const subBanner = this.sanityService.getAllBanners().subscribe((data) => {
       this.banners = data;
-      console.log(this.banners)
     });
 
     this._subscription.add(subProd)

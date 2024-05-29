@@ -60,15 +60,16 @@ export class CarouselComponent implements OnInit {
         );
       },
     },
-    slidesPerView: 1,
+    slidesPerView: 'auto',
     observer: true,
     observeParents: true,
-    // centeredSlides: true,
+    effect: 'coverflow',
     autoplay: true,
+    // centeredSlides: true,
     // breakpoints: {
-    //   400: {
-    //     slidesPerView: 'auto',
-    //     centeredSlides: false,
+    //   576: {
+    //     slidesPerView: 2,
+    //     // centeredSlides: false,
     //   },
     // },
   };
