@@ -10,7 +10,10 @@ import { environment } from '@environments/environment';
 import { IProduct } from '@models/product.model';
 import { Observable, from, tap } from 'rxjs';
 import { ICategory } from '@models/category.model';
-import { IBaseResponse, IResponseProductsByCategory } from '@models/base-response.model';
+import {
+  IBaseResponse,
+  IResponseProductsByCategory,
+} from '@models/base-response.model';
 import { IBanner } from '@models/banner.model';
 
 @Injectable({
@@ -38,48 +41,58 @@ export class SanityService {
   }
 
   getAllProducts(): Observable<IProduct[]> {
-    return from(this.sanityClient().fetch(
-      '*[_type == "product"]|order(_createdAt desc)'
-    ));
+    return from(
+      this.sanityClient().fetch('*[_type == "product"]|order(_createdAt desc)')
+    );
   }
 
   getAllCategories(): Observable<ICategory[]> {
-    return from(this.sanityClient().fetch(
-      '*[_type == "category"]|order(_createdAt desc)'
-    ));
+    return from(
+      this.sanityClient().fetch('*[_type == "category"]|order(_createdAt desc)')
+    );
+  }
+
+  getStoreInformation(): Observable<any> {
+    return from(this.sanityClient().fetch('*[_type == "storeInfor"][0]'));
   }
 
   getAllBanners(): Observable<IBanner[]> {
-    return from(this.sanityClient().fetch(
-      '*[_type == "banner"]|order(_createdAt desc)'
-    ));
+    return from(
+      this.sanityClient().fetch('*[_type == "banner"]|order(_createdAt desc)')
+    );
   }
 
   getProductsByCategory(): Observable<IResponseProductsByCategory[]> {
-    return from(this.sanityClient().fetch(
-      `*[_type == "category"]{
+    return from(
+      this.sanityClient().fetch(
+        `*[_type == "category"]{
         _id,
         title,
         "products": *[_type == "product" && references(^._id)]
       }`
-    ));
+      )
+    );
   }
 
   getDetailProduct(slug: string): Observable<any> {
-    return from(this.sanityClient().fetch(
-      '*[_type == "product" && slug.current == $slug][0]',
-      { slug }
-    ));
+    return from(
+      this.sanityClient().fetch(
+        '*[_type == "product" && slug.current == $slug][0]',
+        { slug }
+      )
+    );
   }
 
   getProductsOfSpecificCategory(slug: string): Observable<any> {
-    return from(this.sanityClient().fetch(
-      `*[_type == "category" && slug.current == $slug][0]{
+    return from(
+      this.sanityClient().fetch(
+        `*[_type == "category" && slug.current == $slug][0]{
         _id,
         title,
         "products": *[_type == "product" && references(^._id)]
       }`,
-      { slug }
-    ));
+        { slug }
+      )
+    );
   }
 }

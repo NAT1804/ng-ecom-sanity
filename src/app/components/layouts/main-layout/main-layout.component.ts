@@ -31,6 +31,7 @@ import { SanityService } from '@services/sanity/sanity.service';
 export class MainLayoutComponent implements OnInit {
   private readonly router = inject(Router);
   categories: any[] = [];
+  storeInfor: any
   private sanityService = inject(SanityService);
 
   constructor() {}
@@ -38,6 +39,11 @@ export class MainLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.sanityService.getAllCategories().subscribe((data) => {
       this.categories = data;
+    });
+
+    this.sanityService.getStoreInformation().subscribe((data) => {
+      this.storeInfor = data;
+      console.log(this.storeInfor)
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
 import { NzHeaderComponent } from 'ng-zorro-antd/layout';
 
@@ -10,5 +10,5 @@ import { NzHeaderComponent } from 'ng-zorro-antd/layout';
   styleUrl: './header.component.less'
 })
 export class HeaderComponent {
-
+  @Input() storeInfor: any
 }

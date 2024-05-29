@@ -1,5 +1,5 @@
 <nz-layout>
-  <nat-header class="sticky top-0 z-10"></nat-header>
+  <nat-header class="sticky top-0 z-10" [storeInfor]="storeInfor"></nat-header>
   <nz-content class="outer-content">
     <nz-layout class="inner-layout">
       <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
@@ -22,6 +22,6 @@
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
-    <nat-footer></nat-footer>
+    <nat-footer [storeInfor]="storeInfor"></nat-footer>
   </nz-content>
 </nz-layout>
