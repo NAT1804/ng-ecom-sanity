@@ -5,9 +5,27 @@
       [nzXs]="24"
       [nzSm]="24"
       [nzLg]="5"
-      class="text-lg text-[#fff] xs:text-center sm:text-center"
+      class="text-xl xs:text-center sm:text-center hotline-container cursor-pointer relative"
+      (click)="callHotline(storeInfor?.hotline)"
     >
-      Hotline: <span class="font-semibold">{{ storeInfor?.hotline }}</span>
+      <div
+        class="wrapper w-0 h-0 xs:inline-block sm:hidden absolute top-[-10px] left-[-60px]"
+      >
+        <div class="ring-container">
+          <div class="coccoc-alo-phone coccoc-alo-green coccoc-alo-show">
+            <div class="coccoc-alo-ph-circle"></div>
+            <div class="coccoc-alo-ph-circle-fill"></div>
+            <div
+              class="coccoc-alo-ph-img-circle bg-phone-call-icon bg-center bg-[#1e1e1e] bg-no-repeat"
+            ></div>
+          </div>
+        </div>
+      </div>
+      Hotline:
+      <span class="font-bold hotline text-2xl">
+        <i class="Phone is-animating"></i>
+        {{ storeInfor?.hotline | phoneFormat }}</span
+      >
     </div>
     <div nz-col [nzXs]="0" [nzSm]="0" [nzLg]="14" class="text-lg text-[#fff]">
       <span class="font-semibold">Địa chỉ:</span> {{ storeInfor?.address }}
@@ -52,27 +70,3 @@
     </ng-template>
   </div>
 </div>
-<!-- <nz-drawer
-  [nzClosable]="false"
-  [nzVisible]="visible"
-  [nzPlacement]="'right'"
-  nzTitle="Drawer"
-  (nzOnClose)="close()"
->
-  <ng-container *nzDrawerContent>
-    <div class="logo"></div>
-    <ul nz-menu nzMode="inline">
-      <li nz-menu-item (click)="goHome()">
-        <span>Trang chủ</span>
-      </li>
-      @for (item of categories; track $index) {
-      <li nz-menu-item (click)="goToPage(item.slug)">
-        <span class="uppercase">{{ item.title }}</span>
-      </li>
-      }
-      <li nz-menu-item>
-        <nat-theme-selector></nat-theme-selector>
-      </li>
-    </ul>
-  </ng-container>
-</nz-drawer> -->

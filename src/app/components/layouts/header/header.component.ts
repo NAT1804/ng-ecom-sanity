@@ -8,6 +8,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { SanityService } from '@services/sanity/sanity.service';
 import { Router } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { PhoneFormatPipe } from '@pipes/phone-format.pipe';
 
 @Component({
   selector: 'nat-header',
@@ -19,7 +20,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     NzInputModule,
     NzButtonModule,
     NzDrawerModule,
-    NzMenuModule
+    NzMenuModule,
+    PhoneFormatPipe,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.less',
@@ -51,5 +53,9 @@ export class HeaderComponent implements OnInit {
 
   close(): void {
     this.visible = false;
+  }
+
+  callHotline(phone: string) {
+    window.open(`tel:${phone}`);
   }
 }

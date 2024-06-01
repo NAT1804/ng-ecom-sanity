@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzLayoutModule, NzSiderComponent } from 'ng-zorro-antd/layout';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -29,7 +29,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     ThemeSelectorComponent,
     NzBackTopModule,
     NzDrawerModule,
-    NzButtonModule
+    NzButtonModule,
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.less',
@@ -37,9 +37,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 export class MainLayoutComponent implements OnInit {
   private readonly router = inject(Router);
   categories: any[] = [];
-  storeInfor: any
+  storeInfor: any;
   private sanityService = inject(SanityService);
   visible = false;
+  @ViewChild('sider', {static: false}) sider!: NzSiderComponent;
 
   constructor() {}
 
@@ -67,5 +68,10 @@ export class MainLayoutComponent implements OnInit {
 
   close(): void {
     this.visible = false;
+  }
+
+  handleThemChange(theme: string) {
+    console.log('theme', theme)
+    this.sider.setCollapsed(true);
   }
 }

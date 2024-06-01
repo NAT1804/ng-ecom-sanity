@@ -1,5 +1,5 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, PLATFORM_ID, inject } from '@angular/core';
 import { ThemeService } from '@services/theme/theme.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -17,6 +17,8 @@ export class ThemeSelectorComponent implements OnInit {
   isBrowser = false;
   currentTheme = 'default';
 
+  @Output() changeTheme: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -33,6 +35,7 @@ export class ThemeSelectorComponent implements OnInit {
     event.preventDefault();
     this.themeService.changeTheme(theme).then((currTheme) => {
       this.currentTheme = currTheme;
+      this.changeTheme.emit(currTheme);
     });
   }
 }

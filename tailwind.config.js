@@ -1,34 +1,70 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
+  content: ["./src/**/*.{html,ts}"],
   theme: {
     colors: {
-      'primary': '#1890ff'
+      primary: "#1890ff",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "zalo-icon": "url('/assets/icons/icons8-zalo.svg')",
+        "phone-icon": "url('/assets/icons/icons8-phone.svg')",
+        "phone-call-icon": "url('/assets/icons/icons8-phone-64.png')",
+        "messenger-icon": "url('/assets/icons/icons8-messenger.svg')",
+        "sms-icon": "url('/assets/icons/icons8-sms-48.png')",
+      },
+      keyframes: {
+        ringRing: {
+          "0%": {
+            transform: "rotate(0) scale(1) skew(1deg)",
+          },
+          "10%": {
+            transform: "rotate(-25deg) scale(1) skew(1deg)",
+          },
+          "20%": {
+            transform: "rotate(25deg) scale(1) skew(1deg)",
+          },
+          "30%": {
+            transform: "rotate(-25deg) scale(1) skew(1deg)",
+          },
+          "40%": {
+            transform: "rotate(25deg) scale(1) skew(1deg)",
+          },
+          "50%": {
+            transform: "rotate(0) scale(1) skew(1deg)",
+          },
+          "100%": {
+            transform: "rotate(0) scale(1) skew(1deg)",
+          },
+        },
+      },
+      animation: {
+        phoneRing: "ringRing 1s infinite ease-in-out",
+      },
+    },
     screens: {
-      'xs': {
-        max: '575px'
+      xxs: {
+        max: "440px",
       },
-      'sm': {
-        min: '576px',
+      xs: {
+        max: "575px",
       },
-      'md': {
-        min: '768px'
+      sm: {
+        min: "576px",
       },
-      'lg': {
-        min: '992px'
+      md: {
+        min: "768px",
       },
-      'xl': {
-        min: '1200px'
+      lg: {
+        min: "992px",
       },
-      '2xl': {
-        min: '1600px'
+      xl: {
+        min: "1200px",
       },
-    }
+      "2xl": {
+        min: "1600px",
+      },
+    },
   },
   plugins: [],
-}
-
+};
