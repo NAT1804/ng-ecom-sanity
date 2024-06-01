@@ -37,9 +37,39 @@ module.exports = {
             transform: "rotate(0) scale(1) skew(1deg)",
           },
         },
+        circleFill: {
+          "0%": {
+            transform: "rotate(0) scale(0.7) skew(1deg)",
+            opacity: 0.2,
+          },
+          "50%": {
+            transform: "rotate(0) scale(1) skew(1deg)",
+            opacity: 0.2,
+          },
+          "100%": {
+            transform: "rotate(0) scale(0.7) skew(1deg)",
+            opacity: 0.2,
+          },
+        },
+        circleExand: {
+          "0%": {
+            transform: "rotate(0) scale(.5) skew(1deg)",
+            opacity: 0.1,
+          },
+          "30%": {
+            transform: "rotate(0) scale(.7) skew(1deg)",
+            opacity: 0.5,
+          },
+          "100%": {
+            transform: "rotate(0) scale(1) skew(1deg)",
+            opacity: 0.1,
+          },
+        },
       },
       animation: {
         phoneRing: "ringRing 1s infinite ease-in-out",
+        circleAnim: "circleExand 1.2s infinite ease-in-out",
+        circleFillAnim: "circleFill 1.2s infinite ease-in-out",
       },
     },
     screens: {
