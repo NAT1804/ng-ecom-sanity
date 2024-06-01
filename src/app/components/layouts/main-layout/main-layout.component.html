@@ -5,20 +5,23 @@
       <nz-sider #sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
         <div class="logo"></div>
         <ul nz-menu nzMode="inline">
-          <li nz-menu-item (click)="goHome(); sider.setCollapsed(true)">
+          <li nz-menu-item (click)="goHome()">
             <span>Trang chủ</span>
           </li>
           @for (item of categories; track $index) {
-            <li nz-menu-item (click)="goToPage(item.slug); sider.setCollapsed(true)">
+          <li nz-menu-item (click)="goToPage(item.slug)" nzMatchRouter>
+            <a [routerLink]="['/', 'categories', item.slug.current]">
               <span class="uppercase">{{ item.title }}</span>
-            </li>
+            </a>
+          </li>
           }
           <li nz-menu-item>
-            <nat-theme-selector (changeTheme)="handleThemChange($event)"></nat-theme-selector>
+            <nat-theme-selector
+              (changeTheme)="handleThemChange($event)"
+            ></nat-theme-selector>
           </li>
         </ul>
       </nz-sider>
-      <!-- <button nz-button nzType="primary" (click)="open()">Open</button> -->
       <nz-content
         class="pt-2 pb-[110px] xs:px-4 sm:px-5 md:px-6 lg:px-7 xl:px-8"
       >
@@ -27,6 +30,5 @@
     </nz-layout>
     <nat-footer [storeInfor]="storeInfor"></nat-footer>
   </nz-content>
-  
 </nz-layout>
 <nz-back-top></nz-back-top>

@@ -1,26 +1,33 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  input,
+} from '@angular/core';
+import { fallbackImage } from '@constants';
 import { SwiperDirective } from '@directives/swiper.directive';
+import { IBanner } from '@models/banner.model';
+import { SanityImagePipe } from '@pipes/sanity-image.pipe';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import {
-  A11y,
-  Autoplay,
-  Mousewheel,
-  Navigation,
-} from 'swiper/modules';
-import { SwiperOptions } from 'swiper/types';
-import { register } from 'swiper/element/bundle';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { IBanner } from '@models/banner.model';
 import { NzImageModule } from 'ng-zorro-antd/image';
-import { SanityImagePipe } from '@pipes/sanity-image.pipe';
-import { fallbackImage } from '@constants';
+import { SwiperOptions } from 'swiper/types';
 
 @Component({
   selector: 'nat-carousel',
   standalone: true,
-  imports: [SwiperDirective, NzButtonModule, NzGridModule, NzIconModule, NzImageModule, SanityImagePipe],
+  imports: [
+    SwiperDirective,
+    NzButtonModule,
+    NzGridModule,
+    NzIconModule,
+    NzImageModule,
+    SanityImagePipe,
+  ],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.less',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -28,17 +35,16 @@ import { fallbackImage } from '@constants';
 export class CarouselComponent implements OnInit {
   slides = input<IBanner[]>([]);
 
-  fallback = fallbackImage
+  fallback = fallbackImage;
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    if(isPlatformBrowser(platformId)) {}
+    if (isPlatformBrowser(platformId)) {
+    }
   }
 
   ngOnInit(): void {}
 
   readonly carouselConfig: SwiperOptions = {
-    // modules: [A11y, Mousewheel, Autoplay],
-    // autoHeight: true,
     spaceBetween: 20,
     navigation: {
       nextEl: '#carousel-next-btn',
@@ -65,12 +71,6 @@ export class CarouselComponent implements OnInit {
     observeParents: true,
     effect: 'coverflow',
     autoplay: true,
-    // centeredSlides: true,
-    // breakpoints: {
-    //   576: {
-    //     slidesPerView: 2,
-    //     // centeredSlides: false,
-    //   },
-    // },
+    loop: true,
   };
 }

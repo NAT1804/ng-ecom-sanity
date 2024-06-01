@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Params,
+  Router,
+} from '@angular/router';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
 import { SanityService } from '@services/sanity/sanity.service';
-import { Subscription, switchMap } from 'rxjs';
+import { Subscription, filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'nat-managemnet-categories',
@@ -14,8 +20,9 @@ import { Subscription, switchMap } from 'rxjs';
 })
 export class ManagemnetCategoriesComponent implements OnInit, OnDestroy {
   private activedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
   private sanityService = inject(SanityService);
-  public data: any;
+  public categoryData: any;
   private _subs: Subscription;
 
   constructor() {
@@ -27,11 +34,13 @@ export class ManagemnetCategoriesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const sub = this.activedRoute.queryParams.pipe(switchMap((param: Params) => {
-      return this.sanityService.getProductsOfSpecificCategory(param['s'])
-    })).subscribe((data) => {
-      this.data = data;
-    })
-    this._subs.add(sub);
+    this.categoryData = this.activedRoute.snapshot.data['categoryData'];
+
+    const routeSub = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.categoryData = this.activedRoute.snapshot.data['categoryData'];
+      }
+    });
+    this._subs.add(routeSub);
   }
 }

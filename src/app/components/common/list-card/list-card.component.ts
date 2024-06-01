@@ -1,17 +1,18 @@
-import { Component, OnInit, inject, input, model, signal } from '@angular/core';
-import { NzListModule } from 'ng-zorro-antd/list';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzImageModule } from 'ng-zorro-antd/image';
-import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { CommonModule, SlicePipe } from '@angular/common';
-import { CarouselComponent } from '../carousel/carousel.component';
-import { SanityImagePipe } from '@pipes/sanity-image.pipe';
-import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { SanityService } from '@services/sanity/sanity.service';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject, input, model, signal } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { fallbackImage } from '@constants';
+import { SanityImagePipe } from '@pipes/sanity-image.pipe';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { CarouselComponent } from '../carousel/carousel.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'nat-list-card',
@@ -28,6 +29,9 @@ import { fallbackImage } from '@constants';
     CarouselComponent,
     SanityImagePipe,
     NzTypographyModule,
+    NzResultModule,
+    NzButtonModule,
+    RouterModule,
   ],
   templateUrl: './list-card.component.html',
   styleUrl: './list-card.component.less',
@@ -35,7 +39,7 @@ import { fallbackImage } from '@constants';
 export class ListCardComponent<T> implements OnInit {
   categoryName = input<string>('Category Name');
   data = input<T[]>([]);
-  pageSize = model(6)
+  pageSize = model(6);
   pageIndex = signal<number>(1);
   fallback = fallbackImage;
   private router = inject(Router);
@@ -45,6 +49,6 @@ export class ListCardComponent<T> implements OnInit {
   ngOnInit(): void {}
 
   openProductDetail(slug: string) {
-    this.router.navigateByUrl(`/products?s=${slug}`);
+    this.router.navigateByUrl(`/products/${slug}`);
   }
 }
