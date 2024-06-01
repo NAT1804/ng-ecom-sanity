@@ -36,17 +36,21 @@
         />
       </ng-template>
       <ng-template #title>
-        <p>
+        <p class="capitalize">
           {{ $any(item).title }}
         </p>
       </ng-template>
       <ng-template #description>
         <div class="price flex items-center justify-end gap-x-2">
           <span class="xs:hidden sm:hidden md:inline-block">Giá: </span>
-          <h3 class="product__price mb-0 text-primary">{{ $any(item)?.defaultProductVariant?.price | currency: 'VND' }}</h3>
+          <h3 class="product__price mb-0 text-primary">
+            {{ $any(item)?.defaultProductVariant?.price | currency : "VND" }}
+          </h3>
           @if ($any(item)?.defaultProductVariant?.maxprice) {
-            <span>-</span>
-            <h3 class="product__maxprice mb-0 text-primary">{{ $any(item)?.defaultProductVariant?.maxprice | currency: 'VND' }}</h3>
+          <span>-</span>
+          <h3 class="product__maxprice mb-0 text-primary">
+            {{ $any(item)?.defaultProductVariant?.maxprice | currency : "VND" }}
+          </h3>
           }
         </div>
         <!-- <p nz-typography nzEllipsis [nzEllipsisRows]="3">
@@ -65,4 +69,12 @@
     (nzPageSizeChange)="pageSize.set($event)"
   ></nz-pagination>
 </div>
+} @else {
+<nz-result nzStatus="404" nzTitle="404" nzSubTitle="Trang không tồn tại">
+  <div nz-result-extra>
+    <button nz-button nzType="primary">
+      <a [routerLink]="'/home'">Về trang chủ</a>
+    </button>
+  </div>
+</nz-result>
 }

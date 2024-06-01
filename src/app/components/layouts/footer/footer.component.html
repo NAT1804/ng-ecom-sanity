@@ -3,7 +3,7 @@
   style="background-color: transparent"
 >
   <div class="contact flex items-center justify-evenly z-10 h-[50px]">
-    <div class="contact__item wrapper">
+    <div class="contact__item wrapper" (click)="handleOpenZalo()">
       <div class="ring-container">
         <div class="phone phone-color">
           <div class="circle animate-circleAnim"></div>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="contact__item wrapper">
+    <div class="contact__item wrapper" (click)="handleCall()">
       <div class="ring-container">
         <div class="phone phone-color">
           <div class="circle animate-circleAnim"></div>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <div class="contact__item wrapper">
+    <div class="contact__item wrapper" (click)="handleOpenFacebook()">
       <div class="ring-container">
         <div class="phone phone-color">
           <div class="circle animate-circleAnim"></div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="contact__item wrapper">
+    <div class="contact__item wrapper" (click)="handleTextSMS()">
       <div class="ring-container">
         <div class="phone phone-color">
           <div class="circle animate-circleAnim"></div>

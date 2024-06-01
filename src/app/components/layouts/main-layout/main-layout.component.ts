@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { NzLayoutModule, NzSiderComponent } from 'ng-zorro-antd/layout';
 import { HeaderComponent } from '../header/header.component';
@@ -40,7 +46,7 @@ export class MainLayoutComponent implements OnInit {
   storeInfor: any;
   private sanityService = inject(SanityService);
   visible = false;
-  @ViewChild('sider', {static: false}) sider!: NzSiderComponent;
+  @ViewChild('sider', { static: false }) sider!: NzSiderComponent;
 
   constructor() {}
 
@@ -56,10 +62,16 @@ export class MainLayoutComponent implements OnInit {
 
   public goHome(): void {
     this.router.navigateByUrl('/home');
+    if (this.sider.matchBreakPoint) {
+      this.sider.setCollapsed(true);
+    }
   }
 
   public goToPage(slug: any) {
-    this.router.navigateByUrl(`/categories?s=${slug.current}`);
+    // this.router.navigateByUrl(`/categories/${slug.current}`);
+    if (this.sider.matchBreakPoint) {
+      this.sider.setCollapsed(true);
+    }
   }
 
   open(): void {
@@ -71,7 +83,8 @@ export class MainLayoutComponent implements OnInit {
   }
 
   handleThemChange(theme: string) {
-    console.log('theme', theme)
-    this.sider.setCollapsed(true);
+    if (this.sider.matchBreakPoint) {
+      this.sider.setCollapsed(true);
+    }
   }
 }

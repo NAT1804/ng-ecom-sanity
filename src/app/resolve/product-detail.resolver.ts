@@ -4,5 +4,5 @@ import { SanityService } from '@services/sanity/sanity.service';
 
 export const productDetailResolver: ResolveFn<boolean> = (route, state) => {
   const sanityService = inject(SanityService);
-  return sanityService.getDetailProduct(route.queryParams['s']);
+  return sanityService.getDetailProduct(route.params['slug']);
 };
