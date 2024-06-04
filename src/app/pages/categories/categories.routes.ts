@@ -11,8 +11,8 @@ export const categoryRoutes: Routes = [
     path: ':slug',
     loadComponent: () =>
       import(
-        '@pages/categories/managemnet-categories/managemnet-categories.component'
-      ).then((m) => m.ManagemnetCategoriesComponent),
+        '@pages/categories/management-categories/management-categories.component'
+      ).then((m) => m.ManagementCategoriesComponent),
     resolve: {
       categoryData: managementCategoryResolver,
     },

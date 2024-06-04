@@ -77,7 +77,13 @@ export class SanityService {
   getDetailProduct(slug: string): Observable<any> {
     return from(
       this.sanityClient().fetch(
-        '*[_type == "product" && slug.current == $slug][0]',
+        `*[_type == "product" && slug.current == $slug][0]{
+        ...,
+        "categories": *[_type == "category" && _id in ^.categories[]._ref]{
+          title,
+          slug
+        }
+        }`,
         { slug }
       )
     );
@@ -92,6 +98,21 @@ export class SanityService {
         "products": *[_type == "product" && references(^._id)]
       }`,
         { slug }
+      )
+    );
+  }
+
+  searchProducts(searchText: string): Observable<any> {
+    return from(
+      this.sanityClient().fetch(
+        `*[_type == "product" && (title match $searchText || body match $searchText)]{
+          ...,
+          "categories": *[_type == "category" && _id in ^.categories[]._ref]{
+            title,
+            slug
+          }
+        }`,
+        { searchText }
       )
     );
   }

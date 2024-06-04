@@ -1,6 +1,8 @@
 @if (data().length > 0) {
 <div class="container-list-card xs:px-2 sm:px-4">
+  @if (categoryName()) {
   <nz-divider class="custom-divider" [nzText]="categoryName()"></nz-divider>
+  }
   <div nz-row [nzGutter]="[16, 16]">
     @for (item of data() | slice : (pageIndex() - 1) * pageSize() : pageIndex()
     * pageSize(); track $index) {
@@ -16,9 +18,8 @@
     >
       <nz-card
         nzHoverable
-        class="w-full"
         [nzCover]="coverTemplate"
-        class="h-full !rounded-lg flex flex-col"
+        class="!rounded-lg flex flex-col"
       >
         <nz-card-meta
           [nzTitle]="title"
@@ -28,7 +29,7 @@
       </nz-card>
       <ng-template #coverTemplate>
         <img
-          class="custom-image !rounded-tl-lg !rounded-tr-lg object-cover h-full"
+          class="custom-image !rounded-tl-lg !rounded-tr-lg object-cover h-[220px]"
           nz-image
           [nzSrc]="$any(item)?.defaultProductVariant?.images?.[0] ? ($any(item).defaultProductVariant.images[0] | sanityImage) : ''"
           [alt]="$any(item).title"
