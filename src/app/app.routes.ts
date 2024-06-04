@@ -19,12 +19,21 @@ export const routes: Routes = [
       {
         path: 'products',
         loadChildren: () =>
-          import('@pages/products/products.routes').then((m) => m.productRoutes),
+          import('@pages/products/products.routes').then(
+            (m) => m.productRoutes
+          ),
       },
       {
         path: 'categories',
         loadChildren: () =>
-          import('@pages/categories/categories.routes').then((m) => m.categoryRoutes),
+          import('@pages/categories/categories.routes').then(
+            (m) => m.categoryRoutes
+          ),
+      },
+      {
+        path: 'search',
+        loadChildren: () =>
+          import('@pages/search/search.routes').then((m) => m.searchRoutes),
       },
     ],
   },

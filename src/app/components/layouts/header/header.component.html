@@ -61,10 +61,22 @@
     class="m-auto xs:px-4 sm:px-5 md:px-6 lg:px-0"
   >
     <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-      <input type="text" nz-input placeholder="Tìm kiếm sản phẩm" />
+      <input
+        type="text"
+        nz-input
+        placeholder="Tìm kiếm sản phẩm"
+        [(ngModel)]="searchText"
+        (keyup.enter)="handleSearchProduct()"
+      />
     </nz-input-group>
     <ng-template #suffixButton>
-      <button nz-button nzType="primary" nzSize="large" nzSearch>
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        nzSearch
+        (click)="handleSearchProduct()"
+      >
         Tìm kiếm
       </button>
     </ng-template>

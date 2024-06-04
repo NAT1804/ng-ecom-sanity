@@ -13,6 +13,8 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { BreakpointObserverService } from '@services/breakpoint-observer/breakpoint-observer.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'nat-list-card',
@@ -37,7 +39,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   styleUrl: './list-card.component.less',
 })
 export class ListCardComponent<T> implements OnInit {
-  categoryName = input<string>('Category Name');
+  categoryName = input<string>('');
   data = input<T[]>([]);
   pageSize = model(6);
   pageIndex = signal<number>(1);

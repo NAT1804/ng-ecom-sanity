@@ -9,6 +9,7 @@ import { SanityService } from '@services/sanity/sanity.service';
 import { Router } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { PhoneFormatPipe } from '@pipes/phone-format.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'nat-header',
@@ -22,6 +23,7 @@ import { PhoneFormatPipe } from '@pipes/phone-format.pipe';
     NzDrawerModule,
     NzMenuModule,
     PhoneFormatPipe,
+    FormsModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.less',
@@ -32,6 +34,7 @@ export class HeaderComponent implements OnInit {
   visible = false;
   private sanityService = inject(SanityService);
   private readonly router = inject(Router);
+  searchText: string = '';
 
   ngOnInit(): void {
     this.sanityService.getAllCategories().subscribe((data) => {
@@ -57,5 +60,13 @@ export class HeaderComponent implements OnInit {
 
   callHotline(phone: string) {
     window.open(`tel:${phone}`);
+  }
+
+  handleSearchProduct() {
+    console.log(this.searchText);
+    if (this.searchText === '') {
+      return;
+    }
+    this.router.navigateByUrl(`/search?s=${this.searchText}`);
   }
 }

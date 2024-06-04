@@ -15,10 +15,10 @@ import { Subscription, filter, switchMap } from 'rxjs';
   selector: 'nat-managemnet-categories',
   standalone: true,
   imports: [CommonModule, ListCardComponent],
-  templateUrl: './managemnet-categories.component.html',
-  styleUrl: './managemnet-categories.component.less',
+  templateUrl: './management-categories.component.html',
+  styleUrl: './management-categories.component.less',
 })
-export class ManagemnetCategoriesComponent implements OnInit, OnDestroy {
+export class ManagementCategoriesComponent implements OnInit, OnDestroy {
   private activedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private sanityService = inject(SanityService);
