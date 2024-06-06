@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzHeaderComponent } from 'ng-zorro-antd/layout';
@@ -27,20 +36,16 @@ import { FormsModule } from '@angular/forms';
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  @Input() storeInfor: any;
-  categories: any[] = [];
-  visible = false;
-  private sanityService = inject(SanityService);
+  storeInfor = input<any>();
+  public categories = signal<any[]>([]);
+  public visible = signal<boolean>(false);
   private readonly router = inject(Router);
-  searchText: string = '';
+  public searchText = '';
 
-  ngOnInit(): void {
-    this.sanityService.getAllCategories().subscribe((data) => {
-      this.categories = data;
-    });
-  }
+  ngOnInit(): void {}
 
   public goHome(): void {
     this.router.navigateByUrl('/home');
@@ -51,11 +56,11 @@ export class HeaderComponent implements OnInit {
   }
 
   open(): void {
-    this.visible = true;
+    this.visible.set(true);
   }
 
   close(): void {
-    this.visible = false;
+    this.visible.set(false);
   }
 
   callHotline(phone: string) {
@@ -63,7 +68,6 @@ export class HeaderComponent implements OnInit {
   }
 
   handleSearchProduct() {
-    console.log(this.searchText);
     if (this.searchText === '') {
       return;
     }

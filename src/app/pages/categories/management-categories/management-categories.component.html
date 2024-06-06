@@ -1,7 +1,7 @@
 <nat-breadcrumb [data]="breadcrumbData()"></nat-breadcrumb>
 
 <nat-list-card
-  [categoryName]="categoryData?.title ?? ''"
-  [data]="categoryData?.products ?? []"
+  [categoryName]="categoryData()?.title ?? ''"
+  [data]="categoryData()?.products ?? []"
   [pageSize]="12"
 ></nat-list-card>

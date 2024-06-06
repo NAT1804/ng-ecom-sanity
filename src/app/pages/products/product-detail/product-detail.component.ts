@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnDestroy,
@@ -45,11 +46,11 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.less',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
-  // private sanityService = inject(SanityService);
   private activedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private sanityService = inject(SanityService);
@@ -58,25 +59,21 @@ export class ProductDetailComponent
   @ViewChild('swiperThumbs', { static: true })
   swiperThumbs!: ElementRef<SwiperContainer>;
 
-  swiperConfig: SwiperOptions = {
+  public swiperConfig = signal<SwiperOptions>({
     spaceBetween: 10,
     slidesPerView: 1,
     loop: true,
     thumbs: {
       swiper: '.mySwiper2',
     },
-  };
+  });
 
-  swiperThumbsConfig: SwiperOptions = {
+  public swiperThumbsConfig = signal<SwiperOptions>({
     spaceBetween: 10,
     freeMode: true,
     watchSlidesProgress: true,
     loop: true,
     navigation: false,
-    // navigation: {
-    //   nextEl: '#carousel-next-btn',
-    //   prevEl: '#carousel-prev-btn',
-    // },
     observer: true,
     observeParents: true,
     slidesPerView: 3,
@@ -92,17 +89,17 @@ export class ProductDetailComponent
         slidesPerView: 6,
       },
     },
-  };
+  });
 
-  productData: any = null;
+  public productData = signal<any>(null);
 
-  _subs: Subscription;
+  private _subs: Subscription;
 
   public triggerGetProductsOfSpecificCategory = new Subject<string>();
 
-  relatedData = signal<any>(null);
+  public relatedData = signal<any>(null);
 
-  breadcrumbData = signal<IBreadcrumb[]>([]);
+  public breadcrumbData = signal<IBreadcrumb[]>([]);
 
   constructor(private i18n: NzI18nService) {
     this.i18n.setLocale(vi_VN);
@@ -112,16 +109,16 @@ export class ProductDetailComponent
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    this.productData = this.activedRoute.snapshot.data['productDetail'];
+    this.productData.set(this.activedRoute.snapshot.data['productDetail']);
 
     this.createBreadcrumbData(this.productData);
 
     const routeSub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.productData = this.activedRoute.snapshot.data['productDetail'];
+        this.productData.set(this.activedRoute.snapshot.data['productDetail']);
         this.createBreadcrumbData(this.productData);
         this.triggerGetProductsOfSpecificCategory.next(
-          this.productData.categories[0].slug.current
+          this.productData().categories[0].slug.current
         );
       }
     });
@@ -139,7 +136,7 @@ export class ProductDetailComponent
     this._subs.add(triggerGetProductsSub);
     console.log(this.productData);
     this.triggerGetProductsOfSpecificCategory.next(
-      this.productData.categories[0].slug.current
+      this.productData().categories[0].slug.current
     );
   }
 
@@ -155,11 +152,11 @@ export class ProductDetailComponent
         link: ['/home'],
       },
       {
-        label: productData.categories[0].title,
-        link: [`/categories/${productData.categories[0].slug.current}`],
+        label: productData().categories[0].title,
+        link: [`/categories/${productData().categories[0].slug.current}`],
       },
       {
-        label: productData.title,
+        label: productData().title,
         link: [],
       },
     ]);

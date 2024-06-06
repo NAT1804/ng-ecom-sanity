@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
   Inject,
   OnDestroy,
@@ -23,24 +24,24 @@ import { Observable, Subscription } from 'rxjs';
   imports: [CommonModule, ListCardComponent, CarouselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  prodBycategories: IResponseProductsByCategory[] = [];
-  banners: IBanner[] = [];
-
   private sanityService = inject(SanityService);
 
+  public prodBycategories = signal<IResponseProductsByCategory[]>([]);
+  public banners = signal<IBanner[]>([]);
   private _subscription: Subscription;
   public size$!: Observable<string>;
   public pageSize = signal<number>(6);
-  private isBrowser!: boolean;
+  private isBrowser = signal<boolean>(false);
 
   constructor(
     private _breakpointObserverService: BreakpointObserverService,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
     this._subscription = new Subscription();
-    this.isBrowser = isPlatformBrowser(platformId);
+    this.isBrowser.set(isPlatformBrowser(platformId));
   }
 
   ngOnDestroy(): void {
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.isBrowser) {
+    if (this.isBrowser()) {
       const subSize = this._breakpointObserverService.size$.subscribe(
         (size) => {
           switch (size) {
@@ -73,11 +74,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     const subProd = this.sanityService
       .getProductsOfAllCategory()
       .subscribe((data) => {
-        this.prodBycategories = data;
+        this.prodBycategories.set(data);
       });
 
     const subBanner = this.sanityService.getAllBanners().subscribe((data) => {
-      this.banners = data;
+      this.banners.set(data);
     });
 
     this._subscription.add(subProd);

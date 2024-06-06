@@ -6,7 +6,7 @@
       [nzSm]="24"
       [nzLg]="5"
       class="text-xl xs:text-center sm:text-center hotline-container cursor-pointer relative"
-      (click)="callHotline(storeInfor?.hotline)"
+      (click)="callHotline(storeInfor()?.hotline)"
     >
       <div
         class="wrapper w-0 h-0 xs:inline-block sm:hidden absolute top-[-10px] left-[-60px]"
@@ -24,14 +24,14 @@
       <span>Hotline:</span>
       <span class="font-bold hotline text-xl">
         <i class="Phone is-animating"></i>
-        {{ storeInfor?.hotline | phoneFormat }}</span
+        {{ storeInfor()?.hotline | phoneFormat }}</span
       >
     </div>
     <div nz-col [nzXs]="0" [nzSm]="0" [nzLg]="14" class="text-lg text-[#fff]">
-      <span class="font-semibold">Địa chỉ:</span> {{ storeInfor?.address }}
+      <span class="font-semibold">Địa chỉ:</span> {{ storeInfor()?.address }}
     </div>
     <div nz-col [nzXs]="0" [nzSm]="0" [nzLg]="5" class="text-lg text-[#fff]">
-      Email: <span class="font-semibold">{{ storeInfor?.email }}</span>
+      Email: <span class="font-semibold">{{ storeInfor()?.email }}</span>
     </div>
   </div>
 </nz-header>

@@ -1,6 +1,9 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
-import { BreakpointObserverService } from '@services/breakpoint-observer/breakpoint-observer.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  input,
+} from '@angular/core';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFooterComponent } from 'ng-zorro-antd/layout';
@@ -11,31 +14,26 @@ import { NzFooterComponent } from 'ng-zorro-antd/layout';
   imports: [NzFooterComponent, NzIconModule, NzGridModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  @Input() storeInfor: any;
-  private isBrowser!: boolean;
+  storeInfor = input<any>();
 
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    private _breakpointObserverService: BreakpointObserverService
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
+  constructor() {}
 
   handleCall() {
-    window.open(`tel:${this.storeInfor?.hotline}`);
+    window.open(`tel:${this.storeInfor()?.hotline}`);
   }
 
   handleOpenZalo() {
-    window.open(this.storeInfor.linkZalo, '_blank');
+    window.open(this.storeInfor()?.linkZalo, '_blank');
   }
 
   handleOpenFacebook() {
-    window.open(this.storeInfor.linkFacebook, '_blank');
+    window.open(this.storeInfor()?.linkFacebook, '_blank');
   }
 
   handleTextSMS() {
-    window.open(`sms:${this.storeInfor?.hotline}`);
+    window.open(`sms:${this.storeInfor()?.hotline}`);
   }
 }
