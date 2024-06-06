@@ -1,78 +1,91 @@
-<article class="product max-w-[600px]">
-  <div class="product_images">
-    <swiper-container
-      #swiper
-      natSwiper
-      [config]="swiperConfig"
-      init="false"
-      class="mySwiper swiper-container w-full h-[300px]"
-    >
-      <!-- thumbs-swiper=".mySwiper2" -->
-      @for (image of productData?.defaultProductVariant.images ?? []; let i =
-      $index; track i) {
-      <swiper-slide>
-        <img
-          [src]="image | sanityImage"
-          [alt]="'Image ' + productData?.title + ' ' + i"
-          loading="lazy"
-        />
-      </swiper-slide>
-      }
-    </swiper-container>
-    <swiper-container
-      #swiperThumbs
-      natSwiper
-      [config]="swiperThumbsConfig"
-      init="false"
-      class="mySwiper2 swiper-container w-full h-[300px]"
-    >
-      @for (image of productData?.defaultProductVariant.images ?? []; let i =
-      $index; track i) {
-      <swiper-slide>
-        <img
-          [src]="image | sanityImage"
-          [alt]="'Image ' + productData?.title + ' ' + i"
-          loading="lazy"
-        />
-      </swiper-slide>
-      }
-    </swiper-container>
+<nat-breadcrumb [data]="breadcrumbData()"></nat-breadcrumb>
+
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12">
+    <article class="product">
+      <div class="product_images">
+        <swiper-container
+          #swiper
+          natSwiper
+          [config]="swiperConfig"
+          init="false"
+          class="mySwiper swiper-container w-full h-[300px]"
+        >
+          <!-- thumbs-swiper=".mySwiper2" -->
+          @for (image of productData?.defaultProductVariant.images ?? []; let i
+          = $index; track i) {
+          <swiper-slide>
+            <img
+              [src]="image | sanityImage"
+              [alt]="'Image ' + productData?.title + ' ' + i"
+              loading="lazy"
+            />
+          </swiper-slide>
+          }
+        </swiper-container>
+        <swiper-container
+          #swiperThumbs
+          natSwiper
+          [config]="swiperThumbsConfig"
+          init="false"
+          class="mySwiper2 swiper-container w-full h-[300px]"
+        >
+          @for (image of productData?.defaultProductVariant.images ?? []; let i
+          = $index; track i) {
+          <swiper-slide>
+            <img
+              [src]="image | sanityImage"
+              [alt]="'Image ' + productData?.title + ' ' + i"
+              loading="lazy"
+            />
+          </swiper-slide>
+          }
+        </swiper-container>
+      </div>
+      <div class="product__container">
+        <h1 class="product__title font-bold text-xl capitalize">
+          {{ productData?.title }}
+        </h1>
+        <nz-tabset>
+          <nz-tab nzTitle="Thông tin">
+            <ng-template nz-tab>
+              <div
+                class="product__content border border-primary p-2 rounded shadow-sm"
+              >
+                <div class="flex items-center gap-x-2">
+                  <span>Đơn vị: </span>
+                  <h3 class="product__price mb-0">
+                    {{ productData?.defaultProductVariant?.title }}
+                  </h3>
+                </div>
+                <div class="price flex items-center gap-x-2">
+                  <span>Giá: </span>
+                  <h3 class="product__price mb-0">
+                    {{
+                      productData?.defaultProductVariant?.price
+                        | currency : "VND"
+                    }}
+                  </h3>
+                  <span>-</span>
+                  <h3 class="product__maxprice mb-0">
+                    {{
+                      productData?.defaultProductVariant?.maxprice
+                        | currency : "VND"
+                    }}
+                  </h3>
+                </div>
+                <div [innerHTML]="productData?.body | portableTextToHTML"></div>
+              </div>
+            </ng-template>
+          </nz-tab>
+        </nz-tabset>
+      </div>
+    </article>
   </div>
-  <div class="product__container">
-    <h1 class="product__title font-bold text-xl capitalize">
-      {{ productData?.title }}
-    </h1>
-    <nz-tabset>
-      <nz-tab nzTitle="Thông tin">
-        <ng-template nz-tab>
-          <div
-            class="product__content border border-primary p-2 rounded shadow-sm"
-          >
-            <div class="flex items-center gap-x-2">
-              <span>Đơn vị: </span>
-              <h3 class="product__price mb-0">
-                {{ productData?.defaultProductVariant?.title }}
-              </h3>
-            </div>
-            <div class="price flex items-center gap-x-2">
-              <span>Giá: </span>
-              <h3 class="product__price mb-0">
-                {{
-                  productData?.defaultProductVariant?.price | currency : "VND"
-                }}
-              </h3>
-              <span>-</span>
-              <h3 class="product__maxprice mb-0">
-                {{
-                  productData?.defaultProductVariant?.maxprice
-                    | currency : "VND"
-                }}
-              </h3>
-            </div>
-            <div [innerHTML]="productData?.body | portableTextToHTML"></div>
-          </div>
-        </ng-template>
-      </nz-tab>
-    </nz-tabset>
-  </div>
-</article>
+  <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12"></div>
+</div>
+
+<nat-list-card
+  [categoryName]="'Sản phẩm cùng loại'"
+  [data]="relatedData()?.products ?? []"
+></nat-list-card>

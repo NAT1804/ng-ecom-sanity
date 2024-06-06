@@ -1,8 +1,34 @@
-<nz-footer
-  class="fixed bottom-0 right-0 left-0 !p-0 drop-shadow z-[2]"
+<nz-footer class="!bg-primary">
+  <div nz-row class="py-2 w-full max-w-[1200px] ml-auto mr-auto text-[#fff]">
+    <div nz-col nzXs="24" nzSm="24" nzLg="12" class="xs:mb-6 sm:mb-6 lg:mb-0">
+      <h2 class="text-xl font-semibold text-[#fff] uppercase">Ăn vặt Cheri</h2>
+      <h3 class="text-[#fff]">Địa chỉ: {{ storeInfor?.address }}</h3>
+      <h3 class="text-[#fff]">Hotline: {{ storeInfor?.hotline }}</h3>
+      <h3 class="text-[#fff]">Website: www.anvatcherry.com</h3>
+      <h3 class="text-[#fff]">Zalo: {{ storeInfor?.linkZalo }}</h3>
+      <h3 class="text-[#fff]">Facebook: {{ storeInfor?.linkFacebook }}</h3>
+      <h3 class="text-[#fff]">Email: {{ storeInfor?.email }}</h3>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzLg="12">
+      <h2 class="text-xl font-semibold text-[#fff] uppercase">
+        Chính sách hỗ trợ
+      </h2>
+      <ul>
+        <li class="mb-2">Tư vấn miễn phí</li>
+        <li class="mb-2">Chính sách mua hàng</li>
+        <li class="mb-2">Chính sách người dùng</li>
+      </ul>
+    </div>
+  </div>
+</nz-footer>
+
+<div
+  class="fixed bottom-0 lg:bottom-[370px] right-0 left-0 lg:left-[calc(100%-80px)] lg:right-[10px] !p-0 drop-shadow z-[2]"
   style="background-color: transparent"
 >
-  <div class="contact flex items-center justify-evenly z-10 h-[50px]">
+  <div
+    class="contact flex items-center justify-evenly z-10 h-[50px] lg:flex-col lg:!bg-transparent lg:!border-none"
+  >
     <div class="contact__item wrapper" (click)="handleOpenZalo()">
       <div class="ring-container">
         <div class="phone phone-color">
@@ -48,4 +74,4 @@
       </div>
     </div>
   </div>
-</nz-footer>
+</div>

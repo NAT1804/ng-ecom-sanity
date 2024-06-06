@@ -62,7 +62,7 @@ export class SanityService {
     );
   }
 
-  getProductsByCategory(): Observable<IResponseProductsByCategory[]> {
+  getProductsOfAllCategory(): Observable<IResponseProductsByCategory[]> {
     return from(
       this.sanityClient().fetch(
         `*[_type == "category"]{
@@ -95,6 +95,7 @@ export class SanityService {
         `*[_type == "category" && slug.current == $slug][0]{
         _id,
         title,
+        slug,
         "products": *[_type == "product" && references(^._id)]
       }`,
         { slug }

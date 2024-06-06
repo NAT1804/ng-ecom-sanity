@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     colors: {
       primary: "#1890ff",
+      transparent: "transparent",
     },
     extend: {
       backgroundImage: {
