@@ -1,0 +1,13 @@
+<div class="py-4">
+  <nz-breadcrumb>
+    @for (item of data(); track $index) { @if(item.link && item.link.length) {
+    <nz-breadcrumb-item>
+      <a [routerLink]="item.link">{{ item.label }}</a>
+    </nz-breadcrumb-item>
+    } @else {
+    <nz-breadcrumb-item>
+      {{ item.label }}
+    </nz-breadcrumb-item>
+    } }
+  </nz-breadcrumb>
+</div>

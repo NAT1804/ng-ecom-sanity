@@ -37,11 +37,17 @@
         />
       </ng-template>
       <ng-template #title>
-        <p class="capitalize">
+        <p class="capitalize mb-0">
           {{ $any(item).title }}
         </p>
       </ng-template>
       <ng-template #description>
+        <div class="flex items-center gap-x-2">
+          <span>Đơn vị: </span>
+          <h3 class="product__price mb-0">
+            {{ $any(item)?.defaultProductVariant?.title }}
+          </h3>
+        </div>
         <div class="price flex items-center justify-end gap-x-2">
           <span class="xs:hidden sm:hidden md:inline-block">Giá: </span>
           <h3 class="product__price mb-0 text-primary">

@@ -1,5 +1,5 @@
 <nz-header class="border-b-2 border-primary">
-  <div nz-row class="py-2">
+  <div nz-row class="py-2 w-full max-w-[1200px] ml-auto mr-auto">
     <div
       nz-col
       [nzXs]="24"
@@ -35,50 +35,55 @@
     </div>
   </div>
 </nz-header>
-<div nz-row class="logo-container pb-2">
-  <div
-    nz-col
-    [nzXs]="{
-      span: 24
-    }"
-    [nzSm]="24"
-    [nzLg]="{
-      span: 2,
-      offset: 2
-    }"
-  >
-    <img
-      src="assets/images/logo.jpg"
-      alt="Logo Ăn Vặt Cheri"
-      class="w-[100px] rounded-[50%] my-2 xs:mx-auto sm:mx-auto"
-    />
-  </div>
-  <div
-    nz-col
-    [nzXs]="24"
-    [nzSm]="24"
-    [nzLg]="16"
-    class="m-auto xs:px-4 sm:px-5 md:px-6 lg:px-0"
-  >
-    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-      <input
-        type="text"
-        nz-input
-        placeholder="Tìm kiếm sản phẩm"
-        [(ngModel)]="searchText"
-        (keyup.enter)="handleSearchProduct()"
+<div class="logo-container">
+  <div nz-row class="pb-2 w-full max-w-[1200px] pl-auto pr-auto">
+    <div
+      nz-col
+      [nzXs]="{
+        span: 24
+      }"
+      [nzSm]="24"
+      [nzLg]="{
+        span: 2,
+        offset: 0
+      }"
+    >
+      <img
+        src="assets/images/logo.jpg"
+        alt="Logo Ăn Vặt Cheri"
+        class="w-[100px] rounded-[50%] my-2 xs:mx-auto sm:mx-auto"
       />
-    </nz-input-group>
-    <ng-template #suffixButton>
-      <button
-        nz-button
-        nzType="primary"
-        nzSize="large"
-        nzSearch
-        (click)="handleSearchProduct()"
-      >
-        Tìm kiếm
-      </button>
-    </ng-template>
+    </div>
+    <div
+      nz-col
+      [nzXs]="24"
+      [nzSm]="24"
+      [nzLg]="{
+        span: 20,
+        offset: 2
+      }"
+      class="m-auto xs:px-4 sm:px-5 md:px-6 lg:px-0"
+    >
+      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+        <input
+          type="text"
+          nz-input
+          placeholder="Tìm kiếm sản phẩm"
+          [(ngModel)]="searchText"
+          (keyup.enter)="handleSearchProduct()"
+        />
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          nzSearch
+          (click)="handleSearchProduct()"
+        >
+          Tìm kiếm
+        </button>
+      </ng-template>
+    </div>
   </div>
 </div>

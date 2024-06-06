@@ -18,6 +18,9 @@ import { SanityService } from '@services/sanity/sanity.service';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { BreakpointObserverService } from '@services/breakpoint-observer/breakpoint-observer.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
@@ -36,6 +39,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzBackTopModule,
     NzDrawerModule,
     NzButtonModule,
+    NzGridModule,
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.less',
@@ -47,6 +51,7 @@ export class MainLayoutComponent implements OnInit {
   private sanityService = inject(SanityService);
   visible = false;
   @ViewChild('sider', { static: false }) sider!: NzSiderComponent;
+  public size$!: Observable<string>;
 
   constructor() {}
 

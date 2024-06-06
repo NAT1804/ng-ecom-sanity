@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     const subProd = this.sanityService
-      .getProductsByCategory()
+      .getProductsOfAllCategory()
       .subscribe((data) => {
         this.prodBycategories = data;
       });
