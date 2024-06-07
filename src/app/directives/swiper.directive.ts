@@ -8,6 +8,7 @@ import {
   Input,
   OnInit,
   PLATFORM_ID,
+  signal,
 } from '@angular/core';
 import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
@@ -19,19 +20,19 @@ import { SwiperOptions } from 'swiper/types';
 export class SwiperDirective implements OnInit, AfterViewInit {
   @Input('config') config?: SwiperOptions;
 
-  private isBrowser: boolean = false;
+  private isBrowser = signal<boolean>(false);
 
   constructor(
     private el: ElementRef<SwiperContainer>,
     @Inject(PLATFORM_ID) platformId: Object
   ) {
-    this.isBrowser = isPlatformBrowser(platformId);
+    this.isBrowser.set(isPlatformBrowser(platformId));
   }
 
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    if (this.isBrowser) {
+    if (this.isBrowser()) {
       const nativeEl = this.el.nativeElement;
       if (nativeEl) {
         Object.assign(nativeEl, this.config);

@@ -1,4 +1,4 @@
-@if (data().length > 0) {
+@if (data()) {
 <div class="container-list-card xs:px-2 sm:px-4">
   @if (categoryName()) {
   <nz-divider class="custom-divider" [nzText]="categoryName()"></nz-divider>
@@ -34,6 +34,7 @@
           [nzSrc]="$any(item)?.defaultProductVariant?.images?.[0] ? ($any(item).defaultProductVariant.images[0] | sanityImage) : ''"
           [alt]="$any(item).title"
           [nzFallback]="fallback"
+          loading="lazy"
         />
       </ng-template>
       <ng-template #title>

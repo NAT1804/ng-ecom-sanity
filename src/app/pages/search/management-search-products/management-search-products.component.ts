@@ -1,6 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  model,
+  signal,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
 import { SanityService } from '@services/sanity/sanity.service';
 import { Subscription, switchMap } from 'rxjs';
@@ -11,14 +19,14 @@ import { Subscription, switchMap } from 'rxjs';
   imports: [CommonModule, ListCardComponent],
   templateUrl: './management-search-products.component.html',
   styleUrl: './management-search-products.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManagementSearchComponent implements OnInit, OnDestroy {
   private activedRoute = inject(ActivatedRoute);
-  private router = inject(Router);
-  public productsData: any = [];
+  public productsData = signal<any[]>([]);
   private _subs: Subscription;
   private readonly sanityService = inject(SanityService);
-  public keyword!: string;
+  public keyword = signal<string>('');
 
   constructor() {
     this._subs = new Subscription();
@@ -29,28 +37,20 @@ export class ManagementSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.productsData = this.activedRoute.snapshot.data['searchProductsData'];
+    this.productsData.set(
+      this.activedRoute.snapshot.data['searchProductsData']
+    );
 
     const queryParamSub = this.activedRoute.queryParams
       .pipe(
         switchMap((params) => {
-          this.keyword = params['s'];
+          this.keyword.set(params['s']);
           return this.sanityService.searchProducts(params['s']);
         })
       )
       .subscribe((data) => {
-        this.productsData = data;
-        console.log(this.productsData);
+        this.productsData.set(data);
       });
     this._subs.add(queryParamSub);
-
-    // const routeSub = this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.productsData =
-    //       this.activedRoute.snapshot.data['searchProductsData'];
-    //     console.log(this.productsData);
-    //   }
-    // });
-    // this._subs.add(routeSub);
   }
 }

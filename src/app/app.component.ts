@@ -8,8 +8,5 @@ import { RouterOutlet } from '@angular/router';
   imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
-
 })
-export class AppComponent {
-  title = 'nat-builder';
-}
+export class AppComponent {}

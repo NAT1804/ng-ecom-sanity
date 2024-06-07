@@ -1,7 +1,7 @@
-<nat-carousel [slides]="banners"></nat-carousel>
+<nat-carousel [slides]="banners()"></nat-carousel>
 
 <div class="container-all-list">
-  @for (item of prodBycategories; track $index) {
+  @for (item of prodBycategories(); track $index) {
   <nat-list-card
     [categoryName]="item.title"
     [data]="item.products"

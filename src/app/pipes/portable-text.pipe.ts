@@ -29,7 +29,10 @@ export class PortableTextToHTML implements PipeTransform {
   components: PortableTextComponents = {
     types: {
       image: ({ value }: { value: string }) =>
-        '<img src="' + this.getImage(value, 900) + '" />',
+        `<img src="${this.getImage(
+          value,
+          900
+        )} loading="lazy" alt="Product Image" />`,
     },
   };
 

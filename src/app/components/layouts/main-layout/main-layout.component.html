@@ -1,5 +1,5 @@
 <nz-layout>
-  <nat-header [storeInfor]="storeInfor"></nat-header>
+  <nat-header [storeInfor]="storeInfor()"></nat-header>
   <nz-content class="outer-content">
     <nz-layout class="inner-layout">
       <nz-sider
@@ -14,7 +14,7 @@
           <li nz-menu-item (click)="goHome()">
             <span>Trang chủ</span>
           </li>
-          @for (item of categories; track $index) {
+          @for (item of categories(); track $index) {
           <li nz-menu-item (click)="goToPage(item.slug)" nzMatchRouter>
             <a [routerLink]="['/', 'categories', item.slug.current]">
               <span class="uppercase">{{ item.title }}</span>
@@ -34,7 +34,7 @@
         </nz-content>
       </div>
     </nz-layout>
-    <nat-footer [storeInfor]="storeInfor"></nat-footer>
+    <nat-footer [storeInfor]="storeInfor()"></nat-footer>
   </nz-content>
 </nz-layout>
 <nz-back-top></nz-back-top>

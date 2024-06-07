@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Params,
-  Router,
-} from '@angular/router';
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BreadcrumbComponent } from '@components/common/breadcrumb/breadcrumb.component';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
 import { IBreadcrumb } from '@models/breadcrumb.model';
-import { SanityService } from '@services/sanity/sanity.service';
-import { Subscription, filter, switchMap } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'nat-managemnet-categories',
@@ -19,12 +19,12 @@ import { Subscription, filter, switchMap } from 'rxjs';
   imports: [CommonModule, ListCardComponent, BreadcrumbComponent],
   templateUrl: './management-categories.component.html',
   styleUrl: './management-categories.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManagementCategoriesComponent implements OnInit, OnDestroy {
   private activedRoute = inject(ActivatedRoute);
   private router = inject(Router);
-  private sanityService = inject(SanityService);
-  public categoryData: any;
+  public categoryData = signal<any>({});
   private _subs: Subscription;
   public breadcrumbData = signal<IBreadcrumb[]>([]);
 
@@ -37,13 +37,13 @@ export class ManagementCategoriesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.categoryData = this.activedRoute.snapshot.data['categoryData'];
+    this.categoryData.set(this.activedRoute.snapshot.data['categoryData']);
 
     this.createBreadcrumbData(this.categoryData);
 
     const routeSub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.categoryData = this.activedRoute.snapshot.data['categoryData'];
+        this.categoryData.set(this.activedRoute.snapshot.data['categoryData']);
         this.createBreadcrumbData(this.categoryData);
       }
     });
@@ -58,7 +58,7 @@ export class ManagementCategoriesComponent implements OnInit, OnDestroy {
         link: ['/home'],
       },
       {
-        label: categoryData.title,
+        label: categoryData().title,
         link: [],
       },
     ]);

@@ -1,46 +1,32 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectionStrategy,
   Component,
-  Inject,
   OnInit,
-  PLATFORM_ID,
   input,
 } from '@angular/core';
 import { fallbackImage } from '@constants';
 import { SwiperDirective } from '@directives/swiper.directive';
 import { IBanner } from '@models/banner.model';
 import { SanityImagePipe } from '@pipes/sanity-image.pipe';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { SwiperOptions } from 'swiper/types';
 
 @Component({
   selector: 'nat-carousel',
   standalone: true,
-  imports: [
-    SwiperDirective,
-    NzButtonModule,
-    NzGridModule,
-    NzIconModule,
-    NzImageModule,
-    SanityImagePipe,
-  ],
+  imports: [SwiperDirective, NzImageModule, SanityImagePipe],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.less',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselComponent implements OnInit {
   slides = input<IBanner[]>([]);
 
-  fallback = fallbackImage;
+  public fallback = fallbackImage;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    if (isPlatformBrowser(platformId)) {
-    }
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -71,6 +57,6 @@ export class CarouselComponent implements OnInit {
     observeParents: true,
     effect: 'coverflow',
     autoplay: true,
-    loop: true,
+    loop: false,
   };
 }

@@ -1,26 +1,26 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  ElementRef,
   OnInit,
   ViewChild,
   inject,
+  signal,
 } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { NzLayoutModule, NzSiderComponent } from 'ng-zorro-antd/layout';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
 import { SanityService } from '@services/sanity/sanity.service';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { BreakpointObserverService } from '@services/breakpoint-observer/breakpoint-observer.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzLayoutModule, NzSiderComponent } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { Observable } from 'rxjs';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-main-layout',
@@ -43,25 +43,26 @@ import { Observable } from 'rxjs';
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.less',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainLayoutComponent implements OnInit {
   private readonly router = inject(Router);
-  categories: any[] = [];
-  storeInfor: any;
+  public categories = signal<any[]>([]);
+  public storeInfor = signal<any>({});
   private sanityService = inject(SanityService);
-  visible = false;
-  @ViewChild('sider', { static: false }) sider!: NzSiderComponent;
+  public visible = signal<boolean>(false);
   public size$!: Observable<string>;
+  @ViewChild('sider', { static: false }) sider!: NzSiderComponent;
 
   constructor() {}
 
   ngOnInit(): void {
     this.sanityService.getAllCategories().subscribe((data) => {
-      this.categories = data;
+      this.categories.set(data);
     });
 
     this.sanityService.getStoreInformation().subscribe((data) => {
-      this.storeInfor = data;
+      this.storeInfor.set(data);
     });
   }
 
@@ -73,18 +74,17 @@ export class MainLayoutComponent implements OnInit {
   }
 
   public goToPage(slug: any) {
-    // this.router.navigateByUrl(`/categories/${slug.current}`);
     if (this.sider.matchBreakPoint) {
       this.sider.setCollapsed(true);
     }
   }
 
   open(): void {
-    this.visible = true;
+    this.visible.set(true);
   }
 
   close(): void {
-    this.visible = false;
+    this.visible.set(false);
   }
 
   handleThemChange(theme: string) {
