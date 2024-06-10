@@ -16,7 +16,7 @@
           <swiper-slide>
             @defer (on viewport) {
             <img
-              [src]="image | sanityImage"
+              [src]="image | sanityImage : { height: 300 }"
               [alt]="'Image ' + productData()?.title + ' ' + i"
               loading="lazy"
             />
@@ -41,7 +41,7 @@
           <swiper-slide>
             @defer (on viewport) {
             <img
-              [src]="image | sanityImage"
+              [src]="image | sanityImage : { height: 300 }"
               [alt]="'Image ' + productData()?.title + ' ' + i"
               loading="lazy"
             />

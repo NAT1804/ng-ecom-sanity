@@ -32,7 +32,7 @@
         <img
           class="custom-image !rounded-tl-lg !rounded-tr-lg object-cover h-[220px]"
           nz-image
-          [nzSrc]="$any(item)?.defaultProductVariant?.images?.[0] ? ($any(item).defaultProductVariant.images[0] | sanityImage) : ''"
+          [nzSrc]="$any(item)?.defaultProductVariant?.images?.[0] ? ($any(item).defaultProductVariant.images[0] | sanityImage: { height: 220}) : ''"
           [alt]="$any(item).title"
           [nzFallback]="fallback"
           loading="lazy"
@@ -67,10 +67,11 @@
         </p> -->
       </ng-template>
       } @placeholder {
-      <nz-skeleton-element
+      <!-- <nz-skeleton-element
         nzType="image"
         [nzActive]="true"
-      ></nz-skeleton-element>
+      ></nz-skeleton-element> -->
+      <nz-spin nzSimple></nz-spin>
       }
     </div>
     }

@@ -86,10 +86,4 @@ export class MainLayoutComponent implements OnInit {
   close(): void {
     this.visible.set(false);
   }
-
-  handleThemChange(theme: string) {
-    if (this.sider.matchBreakPoint) {
-      this.sider.setCollapsed(true);
-    }
-  }
 }

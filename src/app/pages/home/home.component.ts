@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       { name: 'robots', content: 'index, follow' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'image', content: './assets/images/logo.jpg' },
+      { name: 'image', content: './assets/images/logo.webp' },
       { charset: 'UTF-8' },
     ]);
 
