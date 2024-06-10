@@ -22,12 +22,12 @@
         </div>
       </div>
       <span>Hotline:</span>
-      @defer () {
+      @defer (on viewport) {
       <span class="font-bold hotline text-xl">
         <i class="Phone is-animating"></i>
         {{ storeInfor()?.hotline | phoneFormat }}</span
       >
-      } @loading (after 100ms; minimum 1s) {
+      } @placeholder {
       <nz-skeleton-element
         nzType="input"
         [nzActive]="true"
