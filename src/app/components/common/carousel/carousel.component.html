@@ -7,7 +7,7 @@
 >
   @for (slide of slides(); let i = $index; track i) {
   <swiper-slide class="w-[300px]">
-    @defer {
+    @defer (on viewport) {
     <img
       class="custom-image w-full object-cover"
       nz-image
@@ -16,7 +16,7 @@
       [nzFallback]="fallback"
       [nzDisablePreview]="true"
     />
-    } @loading (after 100ms; minimum 1s) {
+    } @placeholder {
     <nz-spin nzSimple></nz-spin>
     }
   </swiper-slide>
