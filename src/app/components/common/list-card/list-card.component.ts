@@ -22,6 +22,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'nat-list-card',
@@ -42,6 +43,7 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     NzButtonModule,
     RouterModule,
     NzSkeletonModule,
+    NzSpinModule,
   ],
   templateUrl: './list-card.component.html',
   styleUrl: './list-card.component.less',

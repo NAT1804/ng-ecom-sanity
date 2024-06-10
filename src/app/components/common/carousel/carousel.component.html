@@ -11,10 +11,12 @@
     <img
       class="custom-image w-full object-cover"
       nz-image
-      [nzSrc]="slide?.image ? (slide.image | sanityImage) : ''"
+      [nzSrc]="slide?.image ? (slide.image | sanityImage : { width: 300 }) : ''"
       [alt]="slide.buttonText"
       [nzFallback]="fallback"
       [nzDisablePreview]="true"
+      width="300"
+      height="300"
     />
     } @placeholder {
     <nz-spin nzSimple></nz-spin>

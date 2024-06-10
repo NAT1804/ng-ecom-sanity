@@ -13,7 +13,7 @@ export class PhoneFormatPipe implements PipeTransform {
     const midSectionStr = inputVal.slice(3, 6);
     const lastSectionStr = inputVal.slice(6, 10);
 
-    ans = `(${areaCodeStr}) ${midSectionStr}-${lastSectionStr}`;
+    ans = `${areaCodeStr}.${midSectionStr}.${lastSectionStr}`;
     return ans;
   }
 }

@@ -12,7 +12,7 @@
         <div class="logo"></div>
         <ul nz-menu nzMode="inline">
           <li nz-menu-item (click)="goHome()">
-            <span>Trang chủ</span>
+            <span class="uppercase">Trang chủ</span>
           </li>
           @for (item of categories(); track $index) {
           <li nz-menu-item (click)="goToPage(item.slug)" nzMatchRouter>
@@ -21,11 +21,6 @@
             </a>
           </li>
           }
-          <li nz-menu-item>
-            <nat-theme-selector
-              (changeTheme)="handleThemChange($event)"
-            ></nat-theme-selector>
-          </li>
         </ul>
       </nz-sider>
       <div class="w-full xl:max-w-[986px] 2xl:max-w-[1200px] ml-auto mr-auto">

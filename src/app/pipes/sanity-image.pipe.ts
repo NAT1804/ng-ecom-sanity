@@ -9,11 +9,29 @@ import { SanityService } from '@services/sanity/sanity.service';
 export class SanityImagePipe implements PipeTransform {
   constructor(private sanityService: SanityService) {}
 
-  transform(value: SanityImageSource, width?: number): string {
-    if (width) {
+  transform(
+    value: SanityImageSource,
+    option?: { width?: number; height?: number }
+  ): string {
+    if (option.width && option.height) {
       return this.sanityService
         .getImageUrlBuilder(value)
-        .width(width)
+        .width(option.width)
+        .height(option.height)
+        .auto('format')
+        .url();
+    }
+    if (option.width) {
+      return this.sanityService
+        .getImageUrlBuilder(value)
+        .width(option.width)
+        .auto('format')
+        .url();
+    }
+    if (option.height) {
+      return this.sanityService
+        .getImageUrlBuilder(value)
+        .height(option.width)
         .auto('format')
         .url();
     }
