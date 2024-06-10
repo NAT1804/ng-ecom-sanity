@@ -7,10 +7,12 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BreadcrumbComponent } from '@components/common/breadcrumb/breadcrumb.component';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
 import { IBreadcrumb } from '@models/breadcrumb.model';
+import { CanonicalService } from '@services/canonical/canonical.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -28,7 +30,11 @@ export class ManagementCategoriesComponent implements OnInit, OnDestroy {
   private _subs: Subscription;
   public breadcrumbData = signal<IBreadcrumb[]>([]);
 
-  constructor() {
+  constructor(
+    private title: Title,
+    private meta: Meta,
+    private canonicalService: CanonicalService
+  ) {
     this._subs = new Subscription();
   }
 
@@ -38,6 +44,28 @@ export class ManagementCategoriesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categoryData.set(this.activedRoute.snapshot.data['categoryData']);
+
+    //#region SEO
+    this.title.setTitle(
+      `Danh mục sản phẩm "${this.categoryData()?.title}" | Ăn vặt Cheri`
+    );
+
+    this.meta.updateTag({
+      name: 'title',
+      content: `Danh mục sản phẩm "${
+        this.categoryData()?.title
+      }" | Ăn vặt Cheri`,
+    });
+
+    this.meta.updateTag({
+      name: 'keywords',
+      content: `Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Trang danh mục sản phẩm, Danh mục sản phẩm ${
+        this.categoryData()?.title
+      }`,
+    });
+
+    this.canonicalService.setCanonicalURL();
+    //#endregion
 
     this.createBreadcrumbData(this.categoryData);
 

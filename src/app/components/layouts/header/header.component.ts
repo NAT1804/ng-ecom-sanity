@@ -14,11 +14,11 @@ import { NzHeaderComponent } from 'ng-zorro-antd/layout';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { SanityService } from '@services/sanity/sanity.service';
 import { Router } from '@angular/router';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { PhoneFormatPipe } from '@pipes/phone-format.pipe';
 import { FormsModule } from '@angular/forms';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'nat-header',
@@ -33,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     NzMenuModule,
     PhoneFormatPipe,
     FormsModule,
+    NzSkeletonModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.less',

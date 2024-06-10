@@ -8,8 +8,10 @@ import {
   model,
   signal,
 } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
+import { CanonicalService } from '@services/canonical/canonical.service';
 import { SanityService } from '@services/sanity/sanity.service';
 import { Subscription, switchMap } from 'rxjs';
 
@@ -28,7 +30,11 @@ export class ManagementSearchComponent implements OnInit, OnDestroy {
   private readonly sanityService = inject(SanityService);
   public keyword = signal<string>('');
 
-  constructor() {
+  constructor(
+    private title: Title,
+    private meta: Meta,
+    private canonicalService: CanonicalService
+  ) {
     this._subs = new Subscription();
   }
 
@@ -37,6 +43,23 @@ export class ManagementSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //#region SEO
+    this.title.setTitle('Tìm kiếm sản phẩm | Ăn vặt Cheri');
+
+    this.meta.updateTag({
+      name: 'title',
+      content: 'Tìm kiếm sản phẩm | Ăn vặt Cheri',
+    });
+
+    this.meta.updateTag({
+      name: 'keywords',
+      content:
+        'Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Trang tìm kiếm sản phẩm',
+    });
+
+    this.canonicalService.setCanonicalURL();
+    //#endregion
+
     this.productsData.set(
       this.activedRoute.snapshot.data['searchProductsData']
     );
@@ -45,6 +68,16 @@ export class ManagementSearchComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((params) => {
           this.keyword.set(params['s']);
+          this.meta.updateTag({
+            name: 'title',
+            content: `Tìm kiếm sản phầm ${params['s']} | Ăn vặt Cheri`,
+          });
+
+          this.meta.updateTag({
+            name: 'keywords',
+            content: `Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Tìm kiếm sản phầm ${params['s']}, Trang tìm kiếm sản phẩm`,
+          });
+
           return this.sanityService.searchProducts(params['s']);
         })
       )

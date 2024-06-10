@@ -27,6 +27,9 @@ import { ListCardComponent } from '@components/common/list-card/list-card.compon
 import { BreadcrumbComponent } from '@components/common/breadcrumb/breadcrumb.component';
 import { IBreadcrumb } from '@models/breadcrumb.model';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { Meta, Title } from '@angular/platform-browser';
+import { CanonicalService } from '@services/canonical/canonical.service';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'nat-product-detail',
@@ -42,6 +45,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     ListCardComponent,
     BreadcrumbComponent,
     NzGridModule,
+    NzSkeletonModule,
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.less',
@@ -101,7 +105,12 @@ export class ProductDetailComponent
 
   public breadcrumbData = signal<IBreadcrumb[]>([]);
 
-  constructor(private i18n: NzI18nService) {
+  constructor(
+    private i18n: NzI18nService,
+    private title: Title,
+    private meta: Meta,
+    private canonicalService: CanonicalService
+  ) {
     this.i18n.setLocale(vi_VN);
     this._subs = new Subscription();
   }
@@ -110,6 +119,28 @@ export class ProductDetailComponent
 
   ngOnInit(): void {
     this.productData.set(this.activedRoute.snapshot.data['productDetail']);
+
+    //#region SEO
+    this.title.setTitle(
+      `Chi tiết sản phẩm "${this.productData()?.title}" | Ăn vặt Cheri`
+    );
+
+    this.meta.updateTag({
+      name: 'title',
+      content: `Chi tiết sản phẩm "${
+        this.productData()?.title
+      }" | Ăn vặt Cheri`,
+    });
+
+    this.meta.updateTag({
+      name: 'keywords',
+      content: `Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Trang thông tin chi tiết sản phẩm, Chi tiết sản phẩm ${
+        this.productData()?.title
+      }`,
+    });
+
+    this.canonicalService.setCanonicalURL();
+    //#endregion
 
     this.createBreadcrumbData(this.productData);
 
@@ -134,7 +165,6 @@ export class ProductDetailComponent
         this.relatedData.set(data);
       });
     this._subs.add(triggerGetProductsSub);
-    console.log(this.productData);
     this.triggerGetProductsOfSpecificCategory.next(
       this.productData().categories[0].slug.current
     );

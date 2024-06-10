@@ -11,15 +11,21 @@
           init="false"
           class="mySwiper swiper-container w-full h-[300px]"
         >
-          <!-- thumbs-swiper=".mySwiper2" -->
           @for (image of productData()?.defaultProductVariant.images ?? []; let
           i = $index; track i) {
           <swiper-slide>
+            @defer {
             <img
               [src]="image | sanityImage"
               [alt]="'Image ' + productData()?.title + ' ' + i"
               loading="lazy"
             />
+            } @loading (after 100ms; minimum 1s) {
+            <nz-skeleton-element
+              nzType="image"
+              [nzActive]="true"
+            ></nz-skeleton-element>
+            }
           </swiper-slide>
           }
         </swiper-container>
@@ -33,11 +39,18 @@
           @for (image of productData()?.defaultProductVariant.images ?? []; let
           i = $index; track i) {
           <swiper-slide>
+            @defer {
             <img
               [src]="image | sanityImage"
               [alt]="'Image ' + productData()?.title + ' ' + i"
               loading="lazy"
             />
+            } @loading (after 100ms; minimum 1s) {
+            <nz-skeleton-element
+              nzType="image"
+              [nzActive]="true"
+            ></nz-skeleton-element>
+            }
           </swiper-slide>
           }
         </swiper-container>
