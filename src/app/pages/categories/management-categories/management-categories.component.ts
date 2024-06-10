@@ -58,6 +58,13 @@ export class ManagementCategoriesComponent implements OnInit, OnDestroy {
     });
 
     this.meta.updateTag({
+      name: 'description',
+      content: `Danh mục sản phẩm "${
+        this.categoryData()?.title
+      }" | Ăn vặt Cheri`,
+    });
+
+    this.meta.updateTag({
       name: 'keywords',
       content: `Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Trang danh mục sản phẩm, Danh mục sản phẩm ${
         this.categoryData()?.title
