@@ -16,6 +16,7 @@
       nzXXl="4"
       class="gutter-row"
     >
+      @defer(on viewport) {
       <nz-card
         nzHoverable
         [nzCover]="coverTemplate"
@@ -65,6 +66,12 @@
           {{ $any(item).blurb }}
         </p> -->
       </ng-template>
+      } @placeholder {
+      <nz-skeleton-element
+        nzType="image"
+        [nzActive]="true"
+      ></nz-skeleton-element>
+      }
     </div>
     }
   </div>

@@ -11,11 +11,12 @@ import { IBanner } from '@models/banner.model';
 import { SanityImagePipe } from '@pipes/sanity-image.pipe';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { SwiperOptions } from 'swiper/types';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'nat-carousel',
   standalone: true,
-  imports: [SwiperDirective, NzImageModule, SanityImagePipe],
+  imports: [SwiperDirective, NzImageModule, SanityImagePipe, NzSpinModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.less',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

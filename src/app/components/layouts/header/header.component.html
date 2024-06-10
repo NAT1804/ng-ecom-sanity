@@ -5,7 +5,7 @@
       [nzXs]="24"
       [nzSm]="24"
       [nzLg]="5"
-      class="text-xl xs:text-center sm:text-center hotline-container cursor-pointer relative"
+      class="text-xl xs:text-center sm:text-center hotline-container cursor-pointer relative flex items-center"
       (click)="callHotline(storeInfor()?.hotline)"
     >
       <div
@@ -22,10 +22,19 @@
         </div>
       </div>
       <span>Hotline:</span>
+      @defer () {
       <span class="font-bold hotline text-xl">
         <i class="Phone is-animating"></i>
         {{ storeInfor()?.hotline | phoneFormat }}</span
       >
+      } @loading (after 100ms; minimum 1s) {
+      <nz-skeleton-element
+        nzType="input"
+        [nzActive]="true"
+        [nzSize]="'large'"
+        style="width: 100%"
+      ></nz-skeleton-element>
+      }
     </div>
     <div nz-col [nzXs]="0" [nzSm]="0" [nzLg]="14" class="text-lg text-[#fff]">
       <span class="font-semibold">Địa chỉ:</span> {{ storeInfor()?.address }}

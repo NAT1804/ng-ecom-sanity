@@ -9,12 +9,14 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { CarouselComponent } from '@components/common/carousel/carousel.component';
 import { ListCardComponent } from '@components/common/list-card/list-card.component';
 import { BREAKPOINTS } from '@constants';
 import { IBanner } from '@models/banner.model';
 import { IResponseProductsByCategory } from '@models/base-response.model';
 import { BreakpointObserverService } from '@services/breakpoint-observer/breakpoint-observer.service';
+import { CanonicalService } from '@services/canonical/canonical.service';
 import { SanityService } from '@services/sanity/sanity.service';
 import { Observable, Subscription } from 'rxjs';
 
@@ -38,7 +40,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private _breakpointObserverService: BreakpointObserverService,
-    @Inject(PLATFORM_ID) platformId: Object
+    @Inject(PLATFORM_ID) platformId: Object,
+    private title: Title,
+    private meta: Meta,
+    private canonicalService: CanonicalService
   ) {
     this._subscription = new Subscription();
     this.isBrowser.set(isPlatformBrowser(platformId));
@@ -49,6 +54,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //#region SEO
+    this.title.setTitle('Trang chủ | Ăn vặt Cheri');
+
+    this.meta.addTags([
+      {
+        name: 'title',
+        content: 'Trang chủ | Ăn vặt Cheri',
+      },
+      {
+        name: 'keywords',
+        content: 'Ăn vặt, Ăn vặt Cheri, Đồ ăn vặt, Bánh tráng',
+      },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'image', content: './assets/images/logo.jpg' },
+      { charset: 'UTF-8' },
+    ]);
+
+    this.canonicalService.setCanonicalURL();
+    //#endregion
+
     if (this.isBrowser()) {
       const subSize = this._breakpointObserverService.size$.subscribe(
         (size) => {
