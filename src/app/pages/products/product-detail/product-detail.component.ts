@@ -133,6 +133,13 @@ export class ProductDetailComponent
     });
 
     this.meta.updateTag({
+      name: 'description',
+      content: `Chi tiết sản phẩm "${
+        this.productData()?.title
+      }" | Ăn vặt Cheri`,
+    });
+
+    this.meta.updateTag({
       name: 'keywords',
       content: `Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Trang thông tin chi tiết sản phẩm, Chi tiết sản phẩm ${
         this.productData()?.title

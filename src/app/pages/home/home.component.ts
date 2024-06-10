@@ -63,6 +63,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         content: 'Trang chủ | Ăn vặt Cheri',
       },
       {
+        name: 'description',
+        content: 'Trang chủ | Ăn vặt Cheri',
+      },
+      {
         name: 'keywords',
         content: 'Ăn vặt, Ăn vặt Cheri, Đồ ăn vặt, Bánh tráng',
       },

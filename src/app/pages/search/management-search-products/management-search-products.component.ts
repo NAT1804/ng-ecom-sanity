@@ -52,6 +52,11 @@ export class ManagementSearchComponent implements OnInit, OnDestroy {
     });
 
     this.meta.updateTag({
+      name: 'description',
+      content: 'Tìm kiếm sản phẩm | Ăn vặt Cheri',
+    });
+
+    this.meta.updateTag({
       name: 'keywords',
       content:
         'Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Trang tìm kiếm sản phẩm',
@@ -71,6 +76,11 @@ export class ManagementSearchComponent implements OnInit, OnDestroy {
           this.meta.updateTag({
             name: 'title',
             content: `Tìm kiếm sản phầm ${params['s']} | Ăn vặt Cheri`,
+          });
+
+          this.meta.updateTag({
+            name: 'description',
+            content: `Shop chuyên cấp sỉ lẻ đồ ăn vặt đa dạng, Tìm kiếm sản phầm ${params['s']}, Trang tìm kiếm sản phẩm`,
           });
 
           this.meta.updateTag({
