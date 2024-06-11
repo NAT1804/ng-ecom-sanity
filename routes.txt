@@ -1,0 +1,6 @@
+/home
+/products/com-day-noi-cha-bong
+/products/hat-macca-500g
+/categories/hang-com-chay-cha-bong
+/categories/hang-kho
+/categories/do-an-healthy

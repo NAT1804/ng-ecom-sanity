@@ -60,20 +60,45 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.meta.addTags([
       {
         name: 'title',
-        content: 'Trang chủ | Ăn vặt Cheri',
+        content:
+          'Shop Ăn vặt Cheri chuyên cung cấp các sản phẩm ăn vặt ngon nhất, đổ sỉ lẻ đa dạng các loại đồ ăn',
       },
       {
         name: 'description',
-        content: 'Trang chủ | Ăn vặt Cheri',
+        content: `Ăn vặt Cheri. Ăn là nghiền, không ngon hoàn tiền ^_^.Sau khi mua hàng, các bạn sẽ trở thành VIP MEMBER của Cheri Food và nhận được một tấm thẻ VIP CARD, hãy giữ lấy chúng để trải nghiệm những ưu đãi siêu độc lạ chỉ có ở Cheri Food. Đặc quyền của VIP MEMBER: - Được tham gia Minigame tri ân khách hàng trên INSTAGRAM với giải thưởng lên đến 30 triệu… - Nhận quà bất kì cho các đơn hàng sau nếu đánh giá 5* trên Shopee. Instagram: anvatcheri. Facebook: Ăn Vặt Cheri`,
       },
       {
         name: 'keywords',
         content: 'Ăn vặt, Ăn vặt Cheri, Đồ ăn vặt, Bánh tráng',
       },
-      { name: 'robots', content: 'index, follow' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'image', content: './assets/images/logo.webp' },
+      { name: 'image', content: 'assets/images/logo.webp' },
       { charset: 'UTF-8' },
+      {
+        name: 'og:title',
+        content:
+          'Shop chuyên cung cấp các sản phẩm ăn vặt ngon nhất, đổ sỉ lẻ đa dạng các loại đồ ăn | Ăn vặt Cheri',
+      },
+      {
+        name: 'og:locale',
+        content: 'vi-VN',
+      },
+      {
+        name: 'og:description',
+        content: `Ăn vặt Cheri. Ăn là nghiền, không ngon hoàn tiền ^_^.Sau khi mua hàng, các bạn sẽ trở thành VIP MEMBER của Cheri Food và nhận được một tấm thẻ VIP CARD, hãy giữ lấy chúng để trải nghiệm những ưu đãi siêu độc lạ chỉ có ở Cheri Food. Đặc quyền của VIP MEMBER: - Được tham gia Minigame tri ân khách hàng trên INSTAGRAM với giải thưởng lên đến 30 triệu… - Nhận quà bất kì cho các đơn hàng sau nếu đánh giá 5* trên Shopee. Instagram: anvatcheri. Facebook: Ăn Vặt Cheri`,
+      },
+      {
+        name: 'og:url',
+        content: 'https://www.anvatcherry.com/',
+      },
+      {
+        name: 'og:type',
+        content: 'website',
+      },
+      {
+        name: 'og:image',
+        content: 'https://www.anvatcherry.com/assets/images/logo.webp',
+      },
     ]);
 
     this.canonicalService.setCanonicalURL();
