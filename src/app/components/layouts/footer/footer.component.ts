@@ -8,6 +8,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFooterComponent } from 'ng-zorro-antd/layout';
 import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-selector.component';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'nat-footer',
@@ -17,6 +18,7 @@ import { ThemeSelectorComponent } from '@components/common/theme-selector/theme-
     NzIconModule,
     NzGridModule,
     ThemeSelectorComponent,
+    NzSkeletonModule,
   ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.less',

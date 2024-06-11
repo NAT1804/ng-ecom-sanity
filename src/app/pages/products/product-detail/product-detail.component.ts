@@ -1,3 +1,4 @@
+import { CurrencyPipe } from '@angular/common';
 import {
   AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -10,26 +11,25 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { BreadcrumbComponent } from '@components/common/breadcrumb/breadcrumb.component';
 import { CarouselComponent } from '@components/common/carousel/carousel.component';
+import { ListCardComponent } from '@components/common/list-card/list-card.component';
 import { SwiperDirective } from '@directives/swiper.directive';
+import { IBreadcrumb } from '@models/breadcrumb.model';
 import { PortableTextToHTML } from '@pipes/portable-text.pipe';
 import { SanityImagePipe } from '@pipes/sanity-image.pipe';
+import { CanonicalService } from '@services/canonical/canonical.service';
 import { SanityService } from '@services/sanity/sanity.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzI18nService, vi_VN } from 'ng-zorro-antd/i18n';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { Subject, Subscription, switchMap } from 'rxjs';
 import { SwiperContainer } from 'swiper/element';
 import { SwiperOptions } from 'swiper/types';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { CurrencyPipe } from '@angular/common';
-import { ListCardComponent } from '@components/common/list-card/list-card.component';
-import { BreadcrumbComponent } from '@components/common/breadcrumb/breadcrumb.component';
-import { IBreadcrumb } from '@models/breadcrumb.model';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { Meta, Title } from '@angular/platform-browser';
-import { CanonicalService } from '@services/canonical/canonical.service';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'nat-product-detail',

@@ -1,20 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { createClient, ClientConfig, SanityClient } from '@sanity/client';
+import { ClientConfig, SanityClient, createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
 import { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 import { environment } from '@environments/environment';
-import { IProduct } from '@models/product.model';
-import { Observable, from, tap } from 'rxjs';
-import { ICategory } from '@models/category.model';
-import {
-  IBaseResponse,
-  IResponseProductsByCategory,
-} from '@models/base-response.model';
 import { IBanner } from '@models/banner.model';
+import { IResponseProductsByCategory } from '@models/base-response.model';
+import { ICategory } from '@models/category.model';
+import { IProduct } from '@models/product.model';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +24,7 @@ export class SanityService {
     apiVersion: environment.sanity.apiVersion,
     useCdn: environment.sanity.useCdn,
   };
-  constructor(private http: HttpClient) {
+  constructor() {
     this.client = this.sanityClient();
     this.imageUrlBuilder = imageUrlBuilder(this.client);
   }

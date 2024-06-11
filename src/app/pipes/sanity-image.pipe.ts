@@ -31,7 +31,7 @@ export class SanityImagePipe implements PipeTransform {
     if (option.height) {
       return this.sanityService
         .getImageUrlBuilder(value)
-        .height(option.width)
+        .height(option.height)
         .auto('format')
         .url();
     }
