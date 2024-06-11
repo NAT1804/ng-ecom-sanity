@@ -21,7 +21,6 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { CarouselComponent } from '../carousel/carousel.component';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
@@ -42,7 +41,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzResultModule,
     NzButtonModule,
     RouterModule,
-    NzSkeletonModule,
     NzSpinModule,
   ],
   templateUrl: './list-card.component.html',
